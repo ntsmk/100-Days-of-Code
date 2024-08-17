@@ -22,7 +22,6 @@ nr_numbers = int(input(f"How many numbers would you like?\n"))
 ran_letter = random.choices(letters, k=nr_letters)
 ran_symbols = random.choices(symbols, k=nr_symbols)
 ran_num = random.choices(numbers, k=nr_numbers)
-nr_total = nr_letters + nr_symbols + nr_numbers
 total_list = ran_letter + ran_symbols + ran_num
 random.shuffle(total_list)
 total = "".join(str(x) for x in total_list)
