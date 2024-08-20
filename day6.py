@@ -64,3 +64,11 @@ flag = at_goal()
 while flag == False:
     jump()
     flag = at_goal()
+
+# hurdle 3
+while not at_goal():
+    if not front_is_clear():
+        if wall_in_front():
+            jump_2()
+    else:
+        move()
