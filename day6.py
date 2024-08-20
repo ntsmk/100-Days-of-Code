@@ -1,5 +1,6 @@
 # https://reeborg.ca/reeborg.html?lang=en&mode=python&menu=worlds/menus/reeborg_intro_en.json&name=Alone&url=worlds/tutorial_en/alone.json
 
+# hurdle 1
 def turn_right():
     turn_left()
     turn_left()
@@ -57,3 +58,9 @@ def jump():
 
 for step in range(6):
     jump()
+
+# hurdle 2
+flag = at_goal()
+while flag == False:
+    jump()
+    flag = at_goal()
