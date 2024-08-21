@@ -115,7 +115,7 @@ while not at_goal():
     else:
         turn_left()
 
-# part 2
+# part 2 almost works. only 1 position does not work
     def turn_right():
         turn_left()
         turn_left()
