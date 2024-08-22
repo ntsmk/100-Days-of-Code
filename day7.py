@@ -12,8 +12,8 @@ print(placeholder)
 matched_letters = []
 
 # TODO-1: - Use a while loop to let the user guess again.
-
-while "_" in placeholder:
+display = placeholder
+while "_" in display:
     guess = input("Guess a letter: ").lower()
     display = ""
 
@@ -27,3 +27,4 @@ while "_" in placeholder:
             display += "_"
 
     print(display)
+
