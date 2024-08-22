@@ -74,20 +74,20 @@ while not game_over:
     guess = input("Guess a letter: ").lower()
 
     display = ""
+    if guess not in chosen_word:
+        lives -= 1
 
     for letter in chosen_word:
+
         if letter == guess:
             display += letter
             correct_letters.append(guess)
-            lives += 1
+
         elif letter in correct_letters:
             display += letter
-            lives += 1
+
         else:
             display += "_"
-
-        if letter != guess:
-            lives -= 1
 
     print(display)
     print(f"your life is {lives} left")
