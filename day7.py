@@ -9,21 +9,19 @@ word_length = len(chosen_word)
 for position in range(word_length):
     placeholder += "_"
 print(placeholder)
+matched_letters = []
 
 # TODO-1: - Use a while loop to let the user guess again.
-thislist = []
-
 
 while "_" in placeholder:
     guess = input("Guess a letter: ").lower()
-
-# TODO-2: Change the for loop so that you keep the previous correct letters in display.
     display = ""
+
     for letter in chosen_word:
         if letter == guess:
             display += letter
-            thislist.append(letter)
-        elif letter in thislist:
+            matched_letters.append(letter)
+        elif letter in matched_letters:
             display += letter
         else:
             display += "_"
