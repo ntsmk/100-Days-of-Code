@@ -6,10 +6,10 @@ alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'
 
 def caesar(original_text, shift_amount, encode_or_decode):
     output_text = ""
+    if encode_or_decode == "decode":
+        shift_amount *= -1
 
     for letter in original_text:
-        if encode_or_decode == "decode":
-            shift_amount *= -1
 
         if letter not in alphabet:
             output_text += letter
