@@ -1,21 +1,20 @@
-student_scores = {
-    'Harry': 88,
-    'Ron': 78,
-    'Hermione': 95,
-    'Draco': 75,
-    'Neville': 60
-}
+import art
+print(art.logo)
+print("Welcome to secret auction program")
 
-for i in student_scores:
-    if student_scores[i] >= 91:
-        student_scores[i] = "Outstanding"
-    elif student_scores[i] >= 81:
-        student_scores[i] = "Exceeds Expectations"
-    elif student_scores[i] >= 71:
-        student_scores[i] = "Acceptable"
-    elif student_scores[i] < 70:
-        student_scores[i] = "Fail"
+new_bids_needed = True
+dic = {}
 
-student_grades = student_scores
+while new_bids_needed:
+    name = input("What is your name?: ")
+    bid = int(input("What is your bid?: $"))
+    dic[name] = bid
+    other_bidders = input("Are there any other bidders? Type 'yes' or 'no'.\n")
+    if other_bidders == "no":
+        new_bids_needed = False
+    else:
+        print("\n" * 20)
 
-print(student_grades)
+who_won = max(dic, key=dic.get)
+bid_won = dic[who_won]
+print(f"The winner is {who_won} with a bid of ${bid_won}.")
