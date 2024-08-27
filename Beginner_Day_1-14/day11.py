@@ -6,3 +6,5 @@ current_score = your_cards[0]+your_cards[1]
 com_first_card = random.choice(cards)
 print(your_cards)
 print(current_score)
+
+#test commit
