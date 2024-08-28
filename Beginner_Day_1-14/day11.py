@@ -1,5 +1,6 @@
 import random
 import art
+
 want_play = False
 play_or_not = input("Do you want to play Black Jack? Type 'y' or 'n': ")
 if play_or_not == 'y':
@@ -44,6 +45,8 @@ while want_play:
             print(f"Your cards: {your_cards}, current score: {current_score}")
             print(f"Computer's first card : {com_first_score}")
             another_card = input("Type 'y' to get another card, type 'n' to pass: ")
+        # elif current_score > 21 and 11 in your_cards:
+
         else:
             not_end = False
             final_hand = your_cards
@@ -54,12 +57,19 @@ while want_play:
             print(f"Computer's final hand : {com_final_hand}, final score: {com_final_score}")
 
             # todo figure it out how to judge winner vs computer
-            if final_score > com_first_score and final_score <= 21:
+            if final_score > com_final_score and final_score <= 21:
                 print("You win!!!")
                 want_play = False
-            elif com_final_score == 21:
+            elif final_score < com_final_score and com_final_score > 21:
+                print("You win!!!")
+                want_play = False
+            elif final_score < com_final_score and com_final_score <= 21:
                 print("You lose..")
                 want_play = False
+            elif final_score == com_final_score:
+                print("Draw!")
+                want_play = False
+
     play_or_not = input("Do you want to play Black Jack? Type 'y' or 'n': ")
     if play_or_not == 'y':
         want_play = True
