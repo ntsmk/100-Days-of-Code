@@ -56,7 +56,6 @@ while want_play:
             print(f"Your final hand: {your_cards}, final score: {final_score}")
             print(f"Computer's final hand : {com_final_hand}, final score: {com_final_score}")
 
-            # todo figure it out how to judge winner vs computer
             if final_score > com_final_score and final_score <= 21:
                 print("You win!!!")
                 want_play = False
