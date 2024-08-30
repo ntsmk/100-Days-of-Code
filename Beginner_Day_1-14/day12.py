@@ -4,7 +4,7 @@ def is_prime(num):
     for i in range(2, (num//2)+1):
         if num % i == 0:
             prime_flag += 1
-    if prime_flag > 1:
+    if prime_flag >= 1:
         return False
     else:
         return True
