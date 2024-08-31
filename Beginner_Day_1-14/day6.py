@@ -130,3 +130,30 @@ while not at_goal():
             move()
         else:
             turn_left()
+
+# works for world1 & 3.json
+def turn_right():
+    turn_left()
+    turn_left()
+    turn_left()
+
+count = 0
+while not at_goal():
+    if right_is_clear():
+        turn_right()
+        move()
+        count += 1
+        if count > 5:
+            if right_is_clear():
+                turn_right()
+                move()
+                move()
+                count -= 5
+            elif front_is_clear():
+                move()
+                move()
+                count -= 5
+    elif front_is_clear():
+        move()
+    else:
+        turn_left()
