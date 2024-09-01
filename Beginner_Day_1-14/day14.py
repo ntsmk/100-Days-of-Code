@@ -15,9 +15,12 @@ game_over = False
 current_score = 0
 dic = game_data.data
 # todo - create new variables, refresh the variables.
+data_c = ""
 while not game_over:
-    data_a = random.sample(dic, 1)
-
+    if current_score >= 1:
+        data_a = data_c
+    else:
+        data_a = random.sample(dic, 1)
     # set variables
     name_a = data_a[0]['name']
     followers_a = data_a[0]['follower_count']
@@ -45,8 +48,10 @@ while not game_over:
     # todo - compare followers count A and B, which is more
     if followers_a > followers_b:
         answer = 'A'
+        data_c = data_a
     else:
         answer = 'B'
+        data_c = data_b
 
     # todo - if the answer is same, add 1 score to current score.
     # todo -  if the answer is not same, print (Sorry, that's wrong. Final score:xx) and end it
