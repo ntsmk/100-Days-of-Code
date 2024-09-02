@@ -27,21 +27,23 @@ operations = {
 
 keep_result = True
 
-while 1 > 0:
-    first_number = float(input("What's the first number?: "))
+
+def calc():
     operation = input("+\n-\n*\n/\nPick an operation: ")
     second_number = float(input("What's the second number?: "))
     answer = operations[operation](first_number, second_number)
     print(f"{first_number} {operation} {second_number} = {answer}")
+    return answer
+
+while 1 > 0:
+    first_number = float(input("What's the first number?: "))
+    answer = calc()
     continue_or_not = input(f"Type 'y' to continue calculating with {answer}, or type 'n' to start a new calculation: ").lower()
 
     while keep_result:
         if continue_or_not == 'y':
             first_number = answer
-            operation = input("+\n-\n*\n/\nPick an operation: ")
-            second_number = float(input("What's the second number?"))
-            answer = operations[operation](first_number, second_number)
-            print(f"{first_number} {operation} {second_number} = {answer}")
+            answer = calc()
             continue_or_not = input(
                 f"Type 'y' to continue calculating with {answer}, or type 'n' to start a new calculation: ").lower()
         elif continue_or_not == 'n':
