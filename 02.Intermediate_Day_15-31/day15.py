@@ -38,19 +38,22 @@ money = 0
 
 
 def report():
+    """Shows the resources"""
     print(f"Water: {water}ml")
     print(f"Milk: {milk}ml")
     print(f"Coffee: {coffee}g")
     print(f"Money: ${money}")
 
 
-# def record_resource(command): # todo need to learn function more
-#     return money + MENU[command]['cost']
-#     return water - MENU[command]['ingredients']['water']
-#     return milk - MENU[command]['ingredients']['milk']
-#     return coffee - MENU[command]['ingredients']['coffee']
+# todo need to learn function more check day 15, 14, 12, 11
+# def record_resource(command):
+#     coffee -= MENU[command]['ingredients']['coffee']
+#     money += MENU[command]['cost']
+#     water -= MENU[command]['ingredients']['water']
+#     milk -= MENU[command]['ingredients']['milk']
 
-# def resource_check(water, milk, coffee): # todo need to learn function more
+# todo need to learn function more check day 15, 14, 12, 11
+# def resource_check(water, milk, coffee):
 #     if water < MENU[command]['ingredients']['water']:
 #         print("not enough water. try again later")
 #     elif coffee < MENU[command]['ingredients']['coffee']:
@@ -60,13 +63,14 @@ def report():
 
 
 def coin_calc():
+    """calculate change"""
     print('Please insert coins')
     quarters = float(input('How many quarters?: '))*0.25
     dimes = float(input('How many dimes?: '))*0.10
     nickles = float(input('How many nickles?: '))*0.05
     pennies = float(input('How many pennies?: '))*0.01
-    total = quarters + dimes + nickles + pennies
-    return total
+    total_f = quarters + dimes + nickles + pennies
+    return total_f
 
 
 while machine_on:
@@ -75,7 +79,6 @@ while machine_on:
     if command == 'report':
         report()
     elif command == 'off':
-        print('Good bye!')
         machine_on = False
     elif command == 'espresso':
         if water < MENU[command]['ingredients']['water']:
@@ -101,7 +104,6 @@ while machine_on:
             print("not enough coffee. try again later")
         elif milk < MENU[command]['ingredients']['milk']:
             print("not enough milk. try again later")
-
         else:
             total = coin_calc()
             if total < MENU[command]['cost']:
@@ -136,4 +138,4 @@ while machine_on:
                 milk -= MENU[command]['ingredients']['milk']
                 coffee -= MENU[command]['ingredients']['coffee']
     else:
-        print('Invalid command. Please try again.')
+        print('Invalid command. Please type again.')
