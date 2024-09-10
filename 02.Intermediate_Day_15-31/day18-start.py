@@ -54,10 +54,12 @@ def change_color():
 #         timmy_the_turtle.right(360/i)
 #     change_color()
 
-change_color()
-r = 70
-# timmy_the_turtle.circle(r)
-timmy_the_turtle.circle(20)
+for i in range(0,361, 10):
+    timmy_the_turtle.speed("fastest")
+    change_color()
+    r = 100
+    timmy_the_turtle.circle(r)
+    timmy_the_turtle.setheading(i)
 
 screen = Screen()
 screen.exitonclick()
