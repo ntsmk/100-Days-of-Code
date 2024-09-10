@@ -1,14 +1,16 @@
 from turtle import Turtle, Screen
-from random import random
+import random as random
 
 timmy_the_turtle = Turtle()
 timmy_the_turtle.shape("turtle")
 timmy_the_turtle.color('#f9d910')
 
+direction = [0,90,180,270]
+
 def change_color():
-    R = random()
-    B = random()
-    G = random()
+    R = random.random()
+    B = random.random()
+    G = random.random()
 
     timmy_the_turtle.color(R, G, B)
 
@@ -23,13 +25,15 @@ def change_color():
 
 # from random import random
 
-for i in range(100):
-    steps = int(random() * 100)
+timmy_the_turtle.pensize(5)
+
+for i in range(250):
+    # steps = int(random() * 100)
     # angle = int(random() * 360)
     change_color()
-    timmy_the_turtle.right(90)
-    timmy_the_turtle.fd(steps)
-    timmy_the_turtle.speed(8)
+    timmy_the_turtle.right(random.choice(direction))
+    timmy_the_turtle.fd(20)
+    timmy_the_turtle.speed("fastest")
 
 # for _ in range(10):
 #     timmy_the_turtle.penup()
