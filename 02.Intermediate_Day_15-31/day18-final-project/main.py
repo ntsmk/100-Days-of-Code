@@ -26,8 +26,8 @@ screen = Screen()
 # need this to choose randomly from color list
 screen.colormode(255)
 
-def select_color():
-    return t.color(random.choice(color_list))
+# def select_color():
+#     return t.color(random.choice(color_list))
 
 # set arrow in the default position
 t.penup()
@@ -42,8 +42,8 @@ y = 0
 # drawing dots
 while y < 10:
     while x < 10:
-        select_color()
-        t.dot(20)
+        # select_color()
+        t.dot(20, random.choice(color_list))
         t.penup()
         t.forward(50)
         x += 1
