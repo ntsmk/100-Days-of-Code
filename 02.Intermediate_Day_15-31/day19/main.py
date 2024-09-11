@@ -44,9 +44,9 @@ while is_race_on:
         turtle.forward(10*random.randint(0,10))
 
 if user_bet == winner.color()[0]:
-    print("your bet was correct, congrats!")
+    print(f"your bet was correct, congrats! The winner color was {winner.color()[0]}.")
 else:
-    print("your bet was wrong, try again")
+    print(f"your bet was wrong, try again. The winner color was {winner.color()[0]}.")
 
 #
 # t1 = Turtle(shape="turtle")
