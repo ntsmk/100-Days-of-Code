@@ -1,6 +1,7 @@
+import random
 from turtle import Turtle, Screen
 
-
+is_race_on = False
 screen = Screen()
 screen.setup(width=500, height=400)
 user_bet = screen.textinput(title="make your bet", prompt="which turtle will win the race? Enter a color: ")
@@ -23,12 +24,29 @@ colors = ["red", "orange", "yellow", "green", "blue", "purple"]
 # screen.onkey(clockwise, "d")
 # screen.onkey(clear, "c")
 # screen.listen()
-# thislist = ["t1", "t2", "t3", "t4", "t5", "t6"] # you don't have to create by distingush number
+t_list = ["t1", "t2", "t3", "t4", "t5", "t6"]
+
+if user_bet:
+    is_race_on = True
+
 for i in range(6):
-    t = Turtle(shape="turtle")
-    t.color(colors[i])
-    t.penup()
-    t.goto(x=-230, y=-100+40*i)
+    t_list[i] = Turtle(shape="turtle")
+    t_list[i].color(colors[i])
+    t_list[i].penup()
+    t_list[i].goto(x=-230, y=-100+40*i)
+
+winner = ""
+while is_race_on:
+    for turtle in t_list:
+        if turtle.xcor() > 230:
+            is_race_on = False
+            winner = turtle
+        turtle.forward(10*random.randint(0,10))
+
+if user_bet == winner.color()[0]:
+    print("your bet was correct, congrats!")
+else:
+    print("your bet was wrong, try again")
 
 #
 # t1 = Turtle(shape="turtle")
