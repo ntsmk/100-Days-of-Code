@@ -25,6 +25,7 @@ t = Turtle()
 screen = Screen()
 # need this to choose randomly from color list
 screen.colormode(255)
+t.hideturtle()
 
 # def select_color():
 #     return t.color(random.choice(color_list))
@@ -50,7 +51,6 @@ while y < 10:
     x = 0
     y += 1
     t.goto(default_x, (default_y+(y*50)))
-t.ht()
 
 
 screen.exitonclick()
