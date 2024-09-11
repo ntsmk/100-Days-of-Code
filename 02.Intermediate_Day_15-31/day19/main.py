@@ -23,12 +23,12 @@ colors = ["red", "orange", "yellow", "green", "blue", "purple"]
 # screen.onkey(clockwise, "d")
 # screen.onkey(clear, "c")
 # screen.listen()
-thislist = ["t1", "t2", "t3", "t4", "t5", "t6"]
+# thislist = ["t1", "t2", "t3", "t4", "t5", "t6"] # you don't have to create by distingush number
 for i in range(6):
-    thislist[i] = Turtle(shape="turtle")
-    thislist[i].color(colors[i])
-    thislist[i].penup()
-    thislist[i].goto(x=-230, y=-100+40*i)
+    t = Turtle(shape="turtle")
+    t.color(colors[i])
+    t.penup()
+    t.goto(x=-230, y=-100+40*i)
 
 #
 # t1 = Turtle(shape="turtle")
