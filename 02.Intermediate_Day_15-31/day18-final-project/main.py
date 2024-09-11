@@ -50,6 +50,7 @@ while y < 10:
     x = 0
     y += 1
     t.goto(default_x, (default_y+(y*50)))
+t.ht()
 
 
 screen.exitonclick()
