@@ -1,10 +1,12 @@
 from turtle import Screen, Turtle
+import time
 
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor("black")
 screen.title("welcome to my snake game")
 t_list = ["t1", "t2", "t3"]
+screen.tracer(0)
 
 for t_index in range(3):
     t_list[t_index] = Turtle(shape="square")
@@ -14,7 +16,16 @@ for t_index in range(3):
 
 game_is_on = True
 while game_is_on:
-    for t_index in t_list:
-        t_index.forward(20)
+    screen.update()
+    time.sleep(0.1)
+    # for t_index in t_list:
+    #     t_index.forward(20)
+    for i in range(len(t_list) - 1, 0, -1):
+        new_x = t_list[i -1].xcor()
+        new_y = t_list[i - 1].ycor()
+        t_list[i].goto(new_x,new_y)
+    t_list[0].forward(20)
+    t_list[0].left(90)
+
 
 screen.exitonclick()
