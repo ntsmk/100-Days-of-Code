@@ -11,12 +11,14 @@ t_list = ["t1", "t2", "t3"]
 
 class Snake():
     def __init__(self):
+        self.create_snake()
+
+    def create_snake(self):
         for t_index in range(3):
             t_list[t_index] = Turtle(shape="square")
             t_list[t_index].color("white")
             t_list[t_index].penup()
             t_list[t_index].goto(-20*1*t_index, 0)
-
 
     def move(self):
         for i in range(len(t_list) - 1, 0, -1):
