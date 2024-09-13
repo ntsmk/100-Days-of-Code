@@ -1,12 +1,6 @@
 from turtle import Screen, Turtle
 import time
 
-screen = Screen()
-screen.setup(width=600, height=600)
-screen.bgcolor("black")
-screen.title("welcome to my snake game")
-screen.tracer(0)
-
 t_list = ["t1", "t2", "t3"]
 
 class Snake():
