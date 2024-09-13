@@ -22,31 +22,15 @@ class Snake():
         t_list[0].forward(20)
 
     def up(self):
-        for i in range(len(t_list) - 1, 0, -1):
-            new_x = t_list[i -1].xcor()
-            new_y = t_list[i - 1].ycor()
-            t_list[i].goto(new_x,new_y)
         t_list[0].setheading(90)
 
 
     def down(self):
-        for i in range(len(t_list) - 1, 0, -1):
-            new_x = t_list[i - 1].xcor()
-            new_y = t_list[i - 1].ycor()
-            t_list[i].goto(new_x, new_y)
         t_list[0].setheading(270)
 
     def left(self):
-        for i in range(len(t_list) - 1, 0, -1):
-            new_x = t_list[i - 1].xcor()
-            new_y = t_list[i - 1].ycor()
-            t_list[i].goto(new_x, new_y)
         t_list[0].setheading(180)
 
 
     def right(self):
-        for i in range(len(t_list) - 1, 0, -1):
-            new_x = t_list[i - 1].xcor()
-            new_y = t_list[i - 1].ycor()
-            t_list[i].goto(new_x, new_y)
         t_list[0].setheading(0)
