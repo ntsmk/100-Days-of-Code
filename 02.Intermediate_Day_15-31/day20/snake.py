@@ -29,10 +29,10 @@ class Snake():
         t_list[-1].goto(-20 * 1 * len(t_list)-1, 0)
 
     def detect_head(self):
-        for i in t_list:
-            if i == t_list[0]:
-                pass
-            elif self.head.distance(i) < 10:
+        for i in t_list[1:]:
+            # if i == t_list[0]:
+            #     pass
+            if self.head.distance(i) < 10:
                 return True
 
     def move(self):
