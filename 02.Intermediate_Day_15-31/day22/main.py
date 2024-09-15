@@ -8,16 +8,20 @@ screen.bgcolor("black")
 screen.title("welcome to my PONG game!")
 screen.tracer(0)
 
-puddle = Puddle()
+r_puddle = Puddle((350,0))
+l_puddle = Puddle((-350,0))
+
 
 screen.listen()
-screen.onkey(puddle.up, "Up")
-screen.onkey(puddle.down, "Down")
+screen.onkey(r_puddle.up, "Up")
+screen.onkey(r_puddle.down, "Down")
+screen.onkey(l_puddle.up, "w")
+screen.onkey(l_puddle.down, "s")
 
 game_is_on = True
 while game_is_on:
     screen.update()
-    time.sleep(0.001)
+    time.sleep(0.1)
 
 
 screen.exitonclick()

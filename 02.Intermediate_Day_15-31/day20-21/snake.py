@@ -1,5 +1,4 @@
-from turtle import Screen, Turtle
-import time
+from turtle import Turtle
 
 UP = 90
 DOWN = 270
@@ -30,8 +29,6 @@ class Snake():
 
     def detect_head(self):
         for i in t_list[1:]:
-            # if i == t_list[0]:
-            #     pass
             if self.head.distance(i) < 10:
                 return True
 
@@ -54,7 +51,6 @@ class Snake():
     def left(self):
         if self.head.heading() != RIGHT:
             self.head.setheading(LEFT)
-
 
     def right(self):
         if self.head.heading() != LEFT:
