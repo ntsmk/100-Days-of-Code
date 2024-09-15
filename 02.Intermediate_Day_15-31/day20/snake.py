@@ -15,11 +15,25 @@ class Snake():
         self.head = t_list[0]
 
     def create_snake(self):
-        for t_index in range(3):
+        for t_index in range(len(t_list)):
             t_list[t_index] = Turtle(shape="square")
             t_list[t_index].color("white")
             t_list[t_index].penup()
             t_list[t_index].goto(-20*1*t_index, 0)
+
+    def add_head(self):
+        t_list.append("new")
+        t_list[-1] = Turtle(shape="square")
+        t_list[-1].color("white")
+        t_list[-1].penup()
+        t_list[-1].goto(-20 * 1 * len(t_list)-1, 0)
+
+    def detect_head(self):
+        for i in t_list:
+            if i == t_list[0]:
+                pass
+            elif self.head.distance(i) < 10:
+                return True
 
     def move(self):
         for i in range(len(t_list) - 1, 0, -1):
