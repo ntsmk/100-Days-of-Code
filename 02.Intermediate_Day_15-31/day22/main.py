@@ -1,5 +1,6 @@
 from turtle import Screen
 from puddle import Puddle
+from ball import Ball
 import time
 
 screen = Screen()
@@ -10,6 +11,7 @@ screen.tracer(0)
 
 r_puddle = Puddle((350,0))
 l_puddle = Puddle((-350,0))
+ball = Ball()
 
 
 screen.listen()
@@ -22,6 +24,10 @@ game_is_on = True
 while game_is_on:
     screen.update()
     time.sleep(0.1)
+    ball.move()
+
+    if ball.ycor() > 280 or ball.ycor() < -280:
+        ball.bounce()
 
 
 screen.exitonclick()
