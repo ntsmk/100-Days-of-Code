@@ -10,6 +10,7 @@ screen.bgcolor("black")
 screen.title("welcome to my PONG game!")
 screen.tracer(0)
 
+
 r_puddle = Puddle((350,0))
 l_puddle = Puddle((-350,0))
 ball = Ball()
@@ -24,7 +25,7 @@ screen.onkey(l_puddle.down, "s")
 game_is_on = True
 while game_is_on:
     screen.update()
-    time.sleep(0.1)
+    time.sleep(ball.ball_speed)
     ball.move()
 
     # detect the collision with wall
@@ -39,10 +40,13 @@ while game_is_on:
     if ball.distance(l_puddle) < 50 and ball.xcor() < -320:
         ball.bounce_x()
 
+
+    # right side misses
     if ball.xcor() > 400:
         ball.reset_ball()
         score.add_score_l()
 
+    # left side misses
     if ball.xcor() < -400:
         ball.reset_ball()
         score.add_score_r()
