@@ -1,6 +1,7 @@
 from turtle import Screen
 from puddle import Puddle
 from ball import Ball
+from score import Score
 import time
 
 screen = Screen()
@@ -12,7 +13,7 @@ screen.tracer(0)
 r_puddle = Puddle((350,0))
 l_puddle = Puddle((-350,0))
 ball = Ball()
-
+score = Score()
 
 screen.listen()
 screen.onkey(r_puddle.up, "Up")
@@ -38,9 +39,13 @@ while game_is_on:
     if ball.distance(l_puddle) < 50 and ball.xcor() < -320:
         ball.bounce_x()
 
-    if ball.xcor() > 400 or ball.xcor() < -400:
+    if ball.xcor() > 400:
         ball.reset_ball()
+        score.add_score_l()
 
+    if ball.xcor() < -400:
+        ball.reset_ball()
+        score.add_score_r()
 
 
 screen.exitonclick()
