@@ -26,9 +26,11 @@ class Score(Turtle):
         self.score_r += 1
         self.clear()
         self.update_r()
+        self.update_l()
 
     def add_score_l(self):
         self.score_l += 1
         self.clear()
         self.update_l()
+        self.update_r()
 
