@@ -35,7 +35,7 @@ while game_is_on:
         ball.bounce_x()
 
     # detect the collision with l_puddle
-    if  ball.distance(l_puddle) < 50 and ball.xcor() < -320:
+    if ball.distance(l_puddle) < 50 and ball.xcor() < -320:
         ball.bounce_x()
 
     if ball.xcor() > 400 or ball.xcor() < -400:
