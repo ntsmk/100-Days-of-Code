@@ -15,3 +15,6 @@ class TurtleItself(Turtle):
 
     def up(self):
         self.forward(MOVE_DISTANCE)
+
+    def gohome(self):
+        self.goto(START_POSITION)

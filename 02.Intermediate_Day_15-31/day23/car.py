@@ -4,12 +4,11 @@ import random
 COLOR = ["red", "blue", "yellow", "orange", "green", "purple", "pink", "grey"]
 STARTING_MOVE_DISTANCE = 5
 MOVE_INCREMENT = 10
-cars = []
+cars_list = []
 
 class Car():
     def __init__(self):
         self.generate()
-
 
     def generate(self):
         for car in range(50):
@@ -17,12 +16,18 @@ class Car():
             car.shape("square")
             car.penup()
             car.shapesize(stretch_len=2, stretch_wid=1)
-            car.goto(random.randint(-300, 300), random.randint(-260, 260))
+            car.goto(random.randint(-400, 400), random.randint(-260, 260))
             car.setheading(180)
             car.color(random.choice(COLOR))
-            cars.append(car)
+            cars_list.append(car)
 
     def move(self):
-        for car in cars:
+        for car in cars_list:
             car.forward(STARTING_MOVE_DISTANCE)
+            if car.xcor() < -400:
+                car.goto(random.randint(300, 400), random.randint(-260, 260))
 
+    def speedup(self):
+        global STARTING_MOVE_DISTANCE
+        global MOVE_INCREMENT
+        STARTING_MOVE_DISTANCE += MOVE_INCREMENT
