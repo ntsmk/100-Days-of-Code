@@ -1,4 +1,5 @@
 from turtle import Turtle
+from turtle_itself import TurtleItself
 import random
 
 COLOR = ["red", "blue", "yellow", "orange", "green", "purple", "pink", "grey"]
@@ -20,6 +21,7 @@ class Car():
             car.setheading(180)
             car.color(random.choice(COLOR))
             cars_list.append(car)
+            self.cars = cars_list
 
     def move(self):
         for car in cars_list:
@@ -31,3 +33,8 @@ class Car():
         global STARTING_MOVE_DISTANCE
         global MOVE_INCREMENT
         STARTING_MOVE_DISTANCE += MOVE_INCREMENT
+
+    # def isHit(self):
+    #     for car in cars_list:
+    #         if car.xcor() == t.xcor() and car.ycor() == t.ycor():
+    #             return True

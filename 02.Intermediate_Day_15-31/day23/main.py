@@ -25,14 +25,12 @@ while game_is_on:
 # detect if the turtle crossed = level up = car speed up
     if t.ycor() > 280:
         car.speedup()
-        t.gohome()
+        t.go_home()
         score.levelup()
 
-# todo detect if the turtle hit the car = game over
-# in level class, put game over as well
-#     if t.distance(car.cars_list):
-#         game_is_on = False
-#         score.gameover
-
+    for i in car.cars:
+        if t.distance(i) < 20:
+            game_is_on = False
+            score.game_over()
 
 screen.exitonclick()
