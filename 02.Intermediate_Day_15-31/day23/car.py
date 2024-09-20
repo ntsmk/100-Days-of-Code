@@ -33,8 +33,3 @@ class Car():
         global STARTING_MOVE_DISTANCE
         global MOVE_INCREMENT
         STARTING_MOVE_DISTANCE += MOVE_INCREMENT
-
-    # def isHit(self):
-    #     for car in cars_list:
-    #         if car.xcor() == t.xcor() and car.ycor() == t.ycor():
-    #             return True

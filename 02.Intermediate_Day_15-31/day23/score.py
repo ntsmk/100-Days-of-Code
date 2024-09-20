@@ -16,7 +16,7 @@ class Score(Turtle):
         self.goto(-300,250)
         self.write(f"Level: {self.score}", False, ALIGN, FONT)
 
-    def levelup(self):
+    def level_up(self):
         self.score += 1
         self.clear()
         self.update()

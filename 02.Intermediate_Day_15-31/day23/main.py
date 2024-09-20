@@ -26,8 +26,9 @@ while game_is_on:
     if t.ycor() > 280:
         car.speedup()
         t.go_home()
-        score.levelup()
+        score.level_up()
 
+# detect if the turtle is hit by the car
     for i in car.cars:
         if t.distance(i) < 20:
             game_is_on = False
