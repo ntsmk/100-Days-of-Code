@@ -6,6 +6,11 @@
 # with open("/Users/Natsumi/Desktop/new_file.txt") as file:
 #     print(file.read())
 
-with open(r"\Users\Natsumi\Desktop\new_file.txt") as file:
+# absolute path
+# with open(r"\Users\Natsumi\Desktop\new_file.txt") as file:
+#     print(file.read())
+
+# relative path
+with open(r"..\..\..\..\..\Desktop\new_file.txt") as file:
     print(file.read())
 
