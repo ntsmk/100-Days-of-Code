@@ -3,5 +3,9 @@
 #     print(contents)
 
 
-with open("new_file.txt", mode="a") as file:
-    file.write("\nNEW TEXT, this is second one")
+# with open("/Users/Natsumi/Desktop/new_file.txt") as file:
+#     print(file.read())
+
+with open(r"\Users\Natsumi\Desktop\new_file.txt") as file:
+    print(file.read())
+
