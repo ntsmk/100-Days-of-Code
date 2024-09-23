@@ -13,7 +13,7 @@ with open(r"Input\Names\invited_names.txt", "r") as names: # open name list as r
     names_text = names.readlines() # this is already list, because using readlines() method
 
 for i in range(len(names_text)):
-    new_text = text.replace("[name]", names_text[i]) # replace each names with [name] blank
+    new_text = text.replace("[name]", names_text[i].strip()) # replace each names with [name] blank and delete \n
     with open(f"Output/ReadyToSend/letter{i}.txt", mode="w") as file: # creates each letters txt file
         file.write(new_text) # writing new text already replaced
 
