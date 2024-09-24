@@ -41,10 +41,24 @@ from statistics import mean
 # print(f"celsius: {celsius}")
 # print(f"fahrenheit: {fahrenheit}")
 
-data_dic ={
-    "student": ["Amy", "james", "angela"],
-    "scores": [78, 57,29]
+# data_dic ={
+#     "student": ["Amy", "james", "angela"],
+#     "scores": [78, 57,29]
+# }
+# data = pandas.DataFrame(data_dic)
+# print(data)
+# data.to_csv("newdata.csv")
+
+# todo take squirrel data and count how many color each on "Primary Fur Color" and export it as "squirrel_count.csv"
+
+row_data = pandas.read_csv("2018_Central_Park_Squirrel_Census_-_Squirrel_Data_20240924.csv")
+gray = row_data[row_data["Primary Fur Color"] == "Gray"]
+cinnamon = row_data[row_data["Primary Fur Color"] == "Cinnamon"]
+black = row_data[row_data["Primary Fur Color"] == "Black"]
+
+squirrel_count ={
+    "Fur Color": ["Gray", "Cinnamon", "Black"],
+    "Count": [len(gray),len(cinnamon),len(black)]
 }
-data = pandas.DataFrame(data_dic)
-print(data)
-data.to_csv("newdata.csv")
+data = pandas.DataFrame(squirrel_count)
+data.to_csv("squirrel_count.csv")
