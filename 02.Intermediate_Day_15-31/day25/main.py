@@ -60,5 +60,5 @@ squirrel_count ={
     "Fur Color": ["Gray", "Cinnamon", "Black"],
     "Count": [len(gray),len(cinnamon),len(black)]
 }
-data = pandas.DataFrame(squirrel_count)
-data.to_csv("squirrel_count.csv")
+df = pandas.DataFrame(squirrel_count)
+df.to_csv("squirrel_count.csv")
