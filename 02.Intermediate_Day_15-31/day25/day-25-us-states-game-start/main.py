@@ -15,7 +15,7 @@ score = Score()
 
 # read CSV file 50_states.csv
 data = pandas.read_csv("50_states.csv")
-state_list = data["state"].to_list()
+state_list = data.state.to_list()
 correct_list = []
 
 isCorrect = False
@@ -37,16 +37,15 @@ while isGameon:
 # todo if matches, the word goes to x and y. increase the score (states)
     if check_state(answer_state):
         correct_state = data[data.state == answer_state]
-        correct_list.append(correct_state.state)
+        # correct_list.append(correct_state.state)
 
-        # name = correct_state.state
-        # x = correct_state.x
-        # y = correct_state.y
-        score.update_state("Alabama", 139 , -77)
+        name = correct_state.state.to_string(index=False, header=False) # this is done.
+        x = correct_state.x.to_numeric(index=False, header=False) # todo
+        y = correct_state.y.to_numeric(index=False, header=False) # todo
+        score.update_state(name, x , y)
 
 
 # todo count the score xx /50 states correct and show it on the title
-        print(correct_list)
 
 
 

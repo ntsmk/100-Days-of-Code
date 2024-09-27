@@ -20,7 +20,7 @@
 import pandas
 from statistics import mean
 
-# data = pandas.read_csv("weather_data.csv")
+data = pandas.read_csv("weather_data.csv")
 
 # # data_dict = data.to_dict()
 # # print(data_dict)
@@ -35,11 +35,11 @@ from statistics import mean
 
 # print(data[data.temp == data.temp.max()])
 #
-# monday = data[data.day == 'Monday']
-# celsius = monday.temp
-# fahrenheit = (celsius * 1.8) + 32
-# print(f"celsius: {celsius}")
-# print(f"fahrenheit: {fahrenheit}")
+monday = data[data.day == 'Monday']
+celsius = monday.temp
+fahrenheit = (celsius * 1.8) + 32
+print(f"celsius: {celsius}")
+print(f"fahrenheit: {fahrenheit}")
 
 # data_dic ={
 #     "student": ["Amy", "james", "angela"],
@@ -50,15 +50,15 @@ from statistics import mean
 # data.to_csv("newdata.csv")
 
 # todo take squirrel data and count how many color each on "Primary Fur Color" and export it as "squirrel_count.csv"
-
-row_data = pandas.read_csv("2018_Central_Park_Squirrel_Census_-_Squirrel_Data_20240924.csv")
-gray = row_data[row_data["Primary Fur Color"] == "Gray"]
-cinnamon = row_data[row_data["Primary Fur Color"] == "Cinnamon"]
-black = row_data[row_data["Primary Fur Color"] == "Black"]
-
-squirrel_count ={
-    "Fur Color": ["Gray", "Cinnamon", "Black"],
-    "Count": [len(gray),len(cinnamon),len(black)]
-}
-df = pandas.DataFrame(squirrel_count)
-df.to_csv("squirrel_count.csv")
+#
+# row_data = pandas.read_csv("2018_Central_Park_Squirrel_Census_-_Squirrel_Data_20240924.csv")
+# gray = row_data[row_data["Primary Fur Color"] == "Gray"]
+# cinnamon = row_data[row_data["Primary Fur Color"] == "Cinnamon"]
+# black = row_data[row_data["Primary Fur Color"] == "Black"]
+#
+# squirrel_count ={
+#     "Fur Color": ["Gray", "Cinnamon", "Black"],
+#     "Count": [len(gray),len(cinnamon),len(black)]
+# }
+# df = pandas.DataFrame(squirrel_count)
+# df.to_csv("squirrel_count.csv")
