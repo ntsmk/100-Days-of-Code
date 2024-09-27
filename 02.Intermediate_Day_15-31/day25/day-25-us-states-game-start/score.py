@@ -13,3 +13,6 @@ class Score(Turtle):
     def update_state(self, state, x, y):
         self.goto(x, y)
         self.write(state, align=ALIGNMENT, font=FONT)
+
+    def show_scores(self):
+        pass
