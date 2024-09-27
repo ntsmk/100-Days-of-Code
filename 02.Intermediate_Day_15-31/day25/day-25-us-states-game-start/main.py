@@ -31,7 +31,11 @@ def check_state(answer):
 
 # keep guessing by using a loop until the end
 while isGameon:
-    answer_state = screen.textinput(title=input_title, prompt="What's another state?").title()
+    if len(correct_list) == 0:
+        answer_state = screen.textinput(title=input_title, prompt="What's another state?").title()
+    elif len(correct_list) != 0:
+        state_score = len(correct_list)
+        answer_state = screen.textinput(title=f"{state_score}/50 States Correct", prompt="What's another state?").title()
 
     # if matches, the word goes to x and y. increase the score (states)
     if check_state(answer_state):
@@ -43,12 +47,10 @@ while isGameon:
         y = int(correct_state.y.iloc[0])
         score.update_state(name, x, y)
 
-    print(correct_list)
-
-    # todo count the score xx /50 states correct and show it on the title
-    if len(correct_list) != 0:
-        score.show_scores()
+    # print(correct_list)
 
 # when you answer every state, the game ends
-    if correct_list == state_list:
+    if len(correct_list) == len(state_list):
+        answer_state = screen.textinput(title=f"{state_score}/50 States Correct",
+                                        prompt="Congrats you did it!").title()
         isGameon = False
