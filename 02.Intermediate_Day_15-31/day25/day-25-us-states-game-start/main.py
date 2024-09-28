@@ -33,9 +33,12 @@ def check_state(answer):
 while isGameon:
     if len(correct_list) == 0:
         answer_state = screen.textinput(title=input_title, prompt="What's another state?").title()
+
     elif len(correct_list) != 0:
         state_score = len(correct_list)
-        answer_state = screen.textinput(title=f"{state_score}/50 States Correct", prompt="What's another state?").title()
+        answer_state = screen.textinput(title=f"{state_score}/50 States Correct",
+                                        prompt="What's another state?").title()
+
 
     # if matches, the word goes to x and y. increase the score (states)
     if check_state(answer_state):
@@ -48,9 +51,14 @@ while isGameon:
         score.update_state(name, x, y)
 
     # print(correct_list)
+    if answer_state == "Exit": # you have to check capital E
+        isGameon = False # or you could use 'break' as an alternative
+
 
 # when you answer every state, the game ends
     if len(correct_list) == len(state_list):
         answer_state = screen.textinput(title=f"{state_score}/50 States Correct",
                                         prompt="Congrats you did it!").title()
         isGameon = False
+
+# states_to_learn.csv, when you put exit as an input, it generates.
