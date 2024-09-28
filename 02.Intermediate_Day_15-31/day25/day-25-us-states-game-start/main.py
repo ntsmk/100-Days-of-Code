@@ -39,9 +39,9 @@ while isGameon:
         answer_state = screen.textinput(title=f"{state_score}/50 States Correct",
                                         prompt="What's another state?").title()
 
-
     # if matches, the word goes to x and y. increase the score (states)
     if check_state(answer_state):
+        state_list.remove(answer_state)
         correct_state = data[data.state == answer_state]
         correct_list.append(correct_state.state.to_string(index=False, header=False))
 
@@ -53,12 +53,12 @@ while isGameon:
     # print(correct_list)
     if answer_state == "Exit": # you have to check capital E
         isGameon = False # or you could use 'break' as an alternative
+        df = pandas.DataFrame(state_list)
+        df.to_csv("states_to_learn.csv")
 
 
-# when you answer every state, the game ends
-    if len(correct_list) == len(state_list):
-        answer_state = screen.textinput(title=f"{state_score}/50 States Correct",
-                                        prompt="Congrats you did it!").title()
-        isGameon = False
-
-# states_to_learn.csv, when you put exit as an input, it generates.
+# when you answer every state, the game ends -> this leads to end the game when you answer 25
+#     if len(correct_list) == len(state_list):
+#         answer_state = screen.textinput(title=f"{state_score}/50 States Correct",
+#                                         prompt="Congrats you did it!").title()
+#         isGameon = False
