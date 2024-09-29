@@ -56,9 +56,3 @@ while isGameon:
         df = pandas.DataFrame(state_list)
         df.to_csv("states_to_learn.csv")
 
-
-# when you answer every state, the game ends -> this leads to end the game when you answer 25
-#     if len(correct_list) == len(state_list):
-#         answer_state = screen.textinput(title=f"{state_score}/50 States Correct",
-#                                         prompt="Congrats you did it!").title()
-#         isGameon = False
