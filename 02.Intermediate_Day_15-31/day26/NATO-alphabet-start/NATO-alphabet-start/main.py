@@ -25,8 +25,12 @@ for (index, row) in student_data_frame.iterrows():
 
 data = pandas.read_csv("nato_phonetic_alphabet.csv")
 data_dict = data.to_dict()
-print(data_dict)
+df = pandas.DataFrame(data_dict)
+new_dict = {row["letter"]:row["code"] for (index, row) in df.iterrows()}
+print(new_dict)
 
+# for index, row in df.iterrows():
+#     print(f"{row["letter"]}:{row["code"]}")
 
 #TODO 2. Create a list of the phonetic code words from a word that the user inputs.
 
