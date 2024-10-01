@@ -6,6 +6,7 @@ student_dict = {
 #Looping through dictionaries:
 for (key, value) in student_dict.items():
     #Access key and value
+    # print(key)
     pass
 
 import pandas
@@ -15,6 +16,7 @@ student_data_frame = pandas.DataFrame(student_dict)
 for (index, row) in student_data_frame.iterrows():
     #Access index and row
     #Access row.student or row.score
+    print(row.score)
     pass
 
 # Keyword Method with iterrows()
@@ -26,7 +28,7 @@ for (index, row) in student_data_frame.iterrows():
 data = pandas.read_csv("nato_phonetic_alphabet.csv")
 data_dict = data.to_dict()
 df = pandas.DataFrame(data_dict)
-new_dict = {row["letter"]:row["code"] for (index, row) in df.iterrows()}
+new_dict = {row.letter: row.code for (index, row) in df.iterrows()}
 print(new_dict)
 
 # for index, row in df.iterrows():
@@ -38,7 +40,7 @@ user_input = input("Enter a word: ").upper()
 # print(input_list)
 # answer_list = [word for word in new_dict.items() if ]
 # print(answer_list)
-thislist = [new_dict[i] for i in user_input]
+thislist = [new_dict[letter] for letter in user_input]
 # for i in input_list:
 #     thislist.append(new_dict[i])
 print(thislist)
