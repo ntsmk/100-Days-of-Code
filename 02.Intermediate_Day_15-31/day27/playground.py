@@ -15,9 +15,9 @@ calculate(add=3, multiply=5)
 
 class Car:
     def __init__(self, **kw):
-        self.make = kw["make"]
-        self.model = kw["model"]
+        self.make = kw.get("make")
+        self.model = kw.get("model")
 
-my_car = Car(make="Toyota", model="RAV4")
+my_car = Car(make="Toyota")
 
-print(my_car.make)
+print(my_car.model)
