@@ -9,14 +9,14 @@ my_label = tkinter.Label(text="I am a label", font=("Arial", 24, "bold"))
 my_label.pack()
 
 def button_clicked():
-    my_label["text"] = "It got clicked"
+    my_label["text"] = input.get()
 
 button = tkinter.Button(text="push!", command=button_clicked)
 button.pack()
 
 input = tkinter.Entry(width=10)
 input.pack()
-print(input.get())
+# print(input.get())
 
 
 
