@@ -1,9 +1,11 @@
 #from tkinter import *
 import tkinter
 
+# window config
 window = tkinter.Tk()
 window.title("welcome to my program")
 window.minsize(width=500, height=300)
+window.config(padx=20, pady=20)
 
 
 # label
