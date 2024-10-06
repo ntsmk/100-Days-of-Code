@@ -13,19 +13,19 @@ input.grid(column=1, row=0)
 
 # labels
 # miles
-my_label = tkinter.Label(text="Miles", font=("Helvetica", 13))
+my_label = tkinter.Label(text="Miles")
 my_label.grid(column=2, row=0)
 
 # is equal to
-my_label = tkinter.Label(text="is equal to", font=("Helvetica", 13))
+my_label = tkinter.Label(text="is equal to")
 my_label.grid(column=0, row=1)
 
 # 0
-my_label2 = tkinter.Label(text=0, font=("Helvetica", 13))
+my_label2 = tkinter.Label(text=0)
 my_label2.grid(column=1, row=1)
 
 # km
-my_label = tkinter.Label(text="Km", font=("Helvetica", 13))
+my_label = tkinter.Label(text="Km")
 my_label.grid(column=2, row=1)
 
 # button
