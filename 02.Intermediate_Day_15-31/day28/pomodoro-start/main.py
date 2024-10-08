@@ -39,6 +39,8 @@ reset_button = Button(text="Reset")
 reset_button.grid(column=2, row=2)
 
 # todo 3 put check marks
+checkmark = Label(text="✔", fg=GREEN, bg=YELLOW, font=(FONT_NAME, 15))
+checkmark.grid(column=1, row=3)
 
 # hint: use grid instead
 # hint: copy and paste the check mark from web "✔"
