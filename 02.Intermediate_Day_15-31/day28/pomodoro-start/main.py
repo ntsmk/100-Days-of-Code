@@ -33,6 +33,10 @@ timer = Label(text="Timer", fg=GREEN, bg=YELLOW, font=(FONT_NAME, 30, "bold"))
 timer.grid(column=1, row=0)
 
 # todo 2 put start and reset button
+start_button = Button(text="Start")
+start_button.grid(column=0, row=2)
+reset_button = Button(text="Reset")
+reset_button.grid(column=2, row=2)
 
 # todo 3 put check marks
 
