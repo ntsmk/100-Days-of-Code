@@ -23,16 +23,21 @@ def start_timer():
     short_break_sec = SHORT_BREAK_MIN * 60
     long_break_sec = LONG_BREAK_MIN * 60
 
+
+    # todo change the label color and edit it work or break
     # when rep = 1,3,5,7:
     if reps % 2 != 0:
         count_down(work_sec)
+        timer.config(text="Work")
 
     # when rep = 2,4,6
     elif reps % 8 == 0:
         count_down(long_break_sec)
+        timer.config(text="Break", fg=RED)
 
     elif reps % 2 == 0:
         count_down(short_break_sec)
+        timer.config(text="Break", fg=PINK)
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
@@ -51,9 +56,6 @@ def count_down(count):
         window.after(1000, count_down, count-1)
     else:
         start_timer()
-
-    # if count_min == 0 and count_sec == "00":
-    #     reps += 1
 
 
 # ---------------------------- UI SETUP ------------------------------- #
