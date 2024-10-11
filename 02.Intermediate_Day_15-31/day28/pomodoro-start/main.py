@@ -57,6 +57,8 @@ def count_down(count):
     else:
         start_timer()
 
+        # todo add one checkmark for every two reps
+
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
