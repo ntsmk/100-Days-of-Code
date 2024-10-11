@@ -22,14 +22,13 @@ def start_timer():
     work_sec = WORK_MIN * 60
     short_break_sec = SHORT_BREAK_MIN * 60
     long_break_sec = LONG_BREAK_MIN * 60
-    # todo figure it out how to set "reps" -> prob finished
 
     # when rep = 1,3,5,7:
     if reps % 2 != 0:
         count_down(work_sec)
 
     # when rep = 2,4,6
-    elif reps == 8:
+    elif reps % 8 == 0:
         count_down(long_break_sec)
 
     elif reps % 2 == 0:
@@ -50,9 +49,11 @@ def count_down(count):
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
     if count > 0:
         window.after(1000, count_down, count-1)
+    else:
+        start_timer()
 
-    if count_min == 0 and count_sec == "00":
-        reps += 1
+    # if count_min == 0 and count_sec == "00":
+    #     reps += 1
 
 
 # ---------------------------- UI SETUP ------------------------------- #
