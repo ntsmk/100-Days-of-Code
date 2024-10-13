@@ -7,8 +7,8 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 25
-SHORT_BREAK_MIN = 5
+WORK_MIN = 1
+SHORT_BREAK_MIN = 1
 LONG_BREAK_MIN = 20
 reps = 0
 
@@ -24,11 +24,10 @@ def start_timer():
     long_break_sec = LONG_BREAK_MIN * 60
 
 
-    # todo change the label color and edit it work or break
     # when rep = 1,3,5,7:
     if reps % 2 != 0:
         count_down(work_sec)
-        timer.config(text="Work")
+        timer.config(text="Work", fg=GREEN)
 
     # when rep = 2,4,6
     elif reps % 8 == 0:
@@ -50,14 +49,16 @@ def count_down(count):
     elif count_sec <= 9:
         count_sec = f"0{count_sec}"
 
-    # print(count)
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
     if count > 0:
         window.after(1000, count_down, count-1)
     else:
+        if reps % 2 == 0:
+            checkmark.config(text="✔"*int((reps/2)))
         start_timer()
 
-        # todo add one checkmark for every two reps
+        #  add one checkmark for every two reps
+        # how can I add 1 more, 2, 3 ,4 ...? -> done
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -85,7 +86,7 @@ reset_button = Button(text="Reset", highlightthickness=0)
 reset_button.grid(column=2, row=2)
 
 # 3 put check marks
-checkmark = Label(text="✔", fg=GREEN, bg=YELLOW, font=(FONT_NAME, 15))
+checkmark = Label(fg=GREEN, bg=YELLOW, font=(FONT_NAME, 15))
 checkmark.grid(column=1, row=3)
 
 
