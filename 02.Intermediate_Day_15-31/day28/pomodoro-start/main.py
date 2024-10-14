@@ -18,8 +18,13 @@ timer = None
 def reset_timer():
     window.after_cancel(timer)
     # timer_text 00:00
+    canvas.itemconfig(timer_text, text="00:00")
+
     # title_label "Timer"
+    timer_title.config(text="Timer", fg=GREEN)
+
     # reset check marks
+    checkmark.config(text="")
 
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 
@@ -34,16 +39,16 @@ def start_timer():
     # when rep = 1,3,5,7:
     if reps % 2 != 0:
         count_down(work_sec)
-        timer.config(text="Work", fg=GREEN)
+        timer_title.config(text="Work", fg=GREEN)
 
     # when rep = 2,4,6
     elif reps % 8 == 0:
         count_down(long_break_sec)
-        timer.config(text="Break", fg=RED)
+        timer_title.config(text="Break", fg=RED)
 
     elif reps % 2 == 0:
         count_down(short_break_sec)
-        timer.config(text="Break", fg=PINK)
+        timer_title.config(text="Break", fg=PINK)
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
@@ -66,9 +71,6 @@ def count_down(count):
             checkmark.config(text="✔"*int((reps/2)))
         start_timer()
 
-        #  add one checkmark for every two reps
-        # how can I add 1 more, 2, 3 ,4 ...? -> done
-
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -85,8 +87,8 @@ canvas.grid(column=1, row=1)
 # count_down(5)
 
 # 1 put big "Timer"
-timer = Label(text="Timer", fg=GREEN, bg=YELLOW, font=(FONT_NAME, 30, "bold"))
-timer.grid(column=1, row=0)
+timer_title = Label(text="Timer", fg=GREEN, bg=YELLOW, font=(FONT_NAME, 30, "bold"))
+timer_title.grid(column=1, row=0)
 
 # 2 put start and reset button
 start_button = Button(text="Start", highlightthickness=0, command=start_timer)
