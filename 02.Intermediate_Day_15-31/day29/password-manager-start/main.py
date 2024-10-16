@@ -11,7 +11,7 @@ window.title("Password manager")
 
 img_file = PhotoImage(file="logo.png")
 canvas = Canvas(width=200, height=200)
-window.config(padx=20, pady=20)
+window.config(padx=50, pady=50)
 
 canvas.create_image(100, 100, image=img_file)
 canvas.grid(column=1, row=0)
@@ -35,6 +35,7 @@ add_button.grid(column=1, row=4, columnspan=2)
 
 web_input = Entry(width=35)
 web_input.grid(column=1, row=1, columnspan=2)
+web_input.focus()
 
 email_input = Entry(width=35)
 email_input.grid(column=1, row=2, columnspan=2)
