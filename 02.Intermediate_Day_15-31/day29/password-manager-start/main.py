@@ -1,23 +1,31 @@
 from tkinter import *
+from tkinter import messagebox
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
-
-# todo write to the data inside data.txt. each data should be on a new line
-# todo all fields will be cleared after "add" button use "delete" method
-
 def save():
-    f = open("data.txt", "a")
-    f.write(f"{web_input.get()} | {email_input.get()} | {pass_input.get()}\n")
-    f.close()
 
-    web_input.delete(0, END)
-    # email_input.delete(0, END)
-    pass_input.delete(0, END)
-    web_input.focus()
+    website = web_input.get()
+    email = email_input.get()
+    password = pass_input.get()
 
+    if website == "" or password == "":
+        messagebox.showinfo("Oops", "please don't leave any fields empty")
 
+    else:
+        is_ok = messagebox.askokcancel(title=website, message=f"These are the details entered: \nEmail: {email}"
+                                                        f"\n Password: {password} \n Is it ok to save?")
+
+        if is_ok:
+            f = open("data.txt", "a")
+            f.write(f"{website} | {email} | {password}\n")
+            f.close()
+
+            web_input.delete(0, END)
+            # email_input.delete(0, END)
+            pass_input.delete(0, END)
+            web_input.focus()
 
 # ---------------------------- UI SETUP ------------------------------- #
 
