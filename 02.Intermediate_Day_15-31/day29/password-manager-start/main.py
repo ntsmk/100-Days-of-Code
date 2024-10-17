@@ -1,55 +1,30 @@
 from tkinter import *
 from tkinter import messagebox
+from random import choice, randint, shuffle
+import pyperclip
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 #Password Generator Project
-import random
-
 def generate():
-    pass_input.delete(0,END)
-    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-               'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-               'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    pass_input.delete(0, END)
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+               'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+               'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
-    nr_letters = random.randint(8, 10)
-    nr_symbols = random.randint(2, 4)
-    nr_numbers = random.randint(2, 4)
+    password_list = [choice(letters) for char in range(randint(8, 10))]
+    password_list += [choice(symbols) for char in range(randint(2, 4))]
+    password_list += [choice(numbers) for char in range(randint(2, 4))]
 
-    password_list = []
-
-# todo change those 3 for loops to list comprehension -> letters is done
-
-    # for char in range(nr_letters):
-    #   password_list.append(random.choice(letters))
-
-    password_list = [random.choice(letters) for char in range(nr_letters)]
-
-    # for char in range(nr_symbols):
-    #   password_list += random.choice(symbols)
-
-    password_list += [random.choice(symbols) for char in range(nr_symbols)]
-
-    # for char in range(nr_numbers):
-    #   password_list += random.choice(numbers)
-
-    password_list += [random.choice(numbers) for char in range(nr_numbers)]
-
-
-    random.shuffle(password_list)
-
-    password = ""
-    for char in password_list:
-      password += char
+    shuffle(password_list)
+    password = "".join(password_list)
 
     pass_input.insert(0, password)
-
-# print(f"Your password is: {password}")
+    pyperclip.copy(password)
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save():
-
     website = web_input.get()
     email = email_input.get()
     password = pass_input.get()
@@ -59,7 +34,7 @@ def save():
 
     else:
         is_ok = messagebox.askokcancel(title=website, message=f"These are the details entered: \nEmail: {email}"
-                                                        f"\n Password: {password} \n Is it ok to save?")
+                                                              f"\n Password: {password} \n Is it ok to save?")
 
         if is_ok:
             f = open("data.txt", "a")
@@ -67,12 +42,11 @@ def save():
             f.close()
 
             web_input.delete(0, END)
-            # email_input.delete(0, END)
             pass_input.delete(0, END)
             web_input.focus()
 
-# ---------------------------- UI SETUP ------------------------------- #
 
+# ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title("Password manager")
 
@@ -108,6 +82,5 @@ email_input.insert(0, "ntsmk@gmail.com")
 
 pass_input = Entry(width=21)
 pass_input.grid(column=1, row=3)
-
 
 window.mainloop()
