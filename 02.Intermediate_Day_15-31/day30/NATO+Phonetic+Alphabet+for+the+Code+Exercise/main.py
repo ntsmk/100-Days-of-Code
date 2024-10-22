@@ -8,10 +8,11 @@ print(phonetic_dict)
 # todo put exception to catch anything other than alphabet and tell warning.
 # KeyError
 # it ask but not keep asking. should I write while loop?
-try:
-    word = input("Enter a word: ").upper()
-    output_list = [phonetic_dict[letter] for letter in word]
-except KeyError:
-    print("Sorry, only letters in the alphabet please.")
-else:
-    print(output_list)
+while True:
+    try:
+        word = input("Enter a word: ").upper()
+        output_list = [phonetic_dict[letter] for letter in word]
+    except KeyError:
+        print("Sorry, only letters in the alphabet please.")
+    else:
+        print(output_list)
