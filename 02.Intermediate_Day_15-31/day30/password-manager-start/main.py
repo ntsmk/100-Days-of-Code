@@ -41,7 +41,7 @@ def save():
 
     else:
         with open("data.json", "w") as data_file:
-            json.dump(new_data, data_file)
+            json.dump(new_data, data_file, indent=4)
 
             web_input.delete(0, END)
             pass_input.delete(0, END)
