@@ -5,8 +5,11 @@ import pyperclip
 import json
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
-#Password Generator Project
 def generate():
+    """
+    generates password randomly
+    :return:
+    """
     pass_input.delete(0, END)
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
                'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
@@ -26,6 +29,10 @@ def generate():
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save():
+    """
+    take data from the field and save it as json file
+    :return:
+    """
     website = web_input.get()
     email = email_input.get()
     password = pass_input.get()
@@ -35,27 +42,33 @@ def save():
             "Password": password,
         }
     }
-
+    # error message for empty
     if website == "" or password == "":
         messagebox.showinfo("Oops", "please don't leave any fields empty")
 
-    # todo put try and exception if it fails to read json file, then create new json
-    # use try to "with open , "r" but how can I use except syntax? "FileNotFoundError"
+    # if it is not empty, save it
     else:
         try:
             with open("data.json", "r") as data_file:
                 # reading old data
                 data = json.load(data_file)
-                # updating old data with new data
-                data.update(new_data)
+
         except FileNotFoundError:
             with open("data.json", "w") as data_file:
                 # writing data
                 json.dump(new_data, data_file, indent=4)
-                web_input.delete(0, END)
-                pass_input.delete(0, END)
-                web_input.focus()
 
+        # if reading (try part) is successful
+        else:
+            # updating old data with new data
+            data.update(new_data)
+            with open("data.json", "w") as data_file:
+                # writing data
+                json.dump(data, data_file, indent=4)
+        finally:
+            web_input.delete(0, END)
+            pass_input.delete(0, END)
+            web_input.focus()
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title("Password manager")
