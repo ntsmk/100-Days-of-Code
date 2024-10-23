@@ -28,18 +28,19 @@ def generate():
     pyperclip.copy(password)
 
 # ---------------------------- FIND PASSWORD ------------------------------- #
-# todo if not, catches exception and show message "no data found" when search button is hit
-# current status: when it matches it shows email address and password but exception is not in yet(#6,7)
+# todo if not, catches exception
+# current status: when it matches it shows email address and password but exception is not in yet(#6)
 
 def find_password():
     entered_website = web_input.get()
     with open("data.json", "r") as data_file:
         websites = json.load(data_file)
-        for data in websites:
-            if entered_website == data:
-                messagebox.showinfo(data,
-                                    f"Email: {websites[data]["email"]}\nPassword: {websites[data]["Password"]}")
-
+        if entered_website in websites:
+            messagebox.showinfo(entered_website,
+                                f"Email: {websites[entered_website]["email"]}\n"
+                                f"Password: {websites[entered_website]["Password"]}")
+        else:
+            messagebox.showinfo("Oops", "No Data file found")
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save():
