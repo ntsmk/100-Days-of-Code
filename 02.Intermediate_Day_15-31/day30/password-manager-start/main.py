@@ -39,20 +39,22 @@ def save():
     if website == "" or password == "":
         messagebox.showinfo("Oops", "please don't leave any fields empty")
 
+    # todo put try and exception if it fails to read json file, then create new json
+    # use try to "with open , "r" but how can I use except syntax? "FileNotFoundError"
     else:
-        with open("data.json", "r") as data_file:
-            # reading old data
-            data = json.load(data_file)
-            # updating old data with new data
-            data.update(new_data)
-
-        with open("data.json", "w") as data_file:
-            # saving updated data
-            json.dump(data, data_file, indent=4)
-            web_input.delete(0, END)
-            pass_input.delete(0, END)
-            web_input.focus()
-
+        try:
+            with open("data.json", "r") as data_file:
+                # reading old data
+                data = json.load(data_file)
+                # updating old data with new data
+                data.update(new_data)
+        except FileNotFoundError:
+            with open("data.json", "w") as data_file:
+                # writing data
+                json.dump(new_data, data_file, indent=4)
+                web_input.delete(0, END)
+                pass_input.delete(0, END)
+                web_input.focus()
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
