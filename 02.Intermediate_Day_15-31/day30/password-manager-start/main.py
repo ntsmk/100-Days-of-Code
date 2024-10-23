@@ -40,7 +40,7 @@ def find_password():
                                 f"Email: {websites[entered_website]["email"]}\n"
                                 f"Password: {websites[entered_website]["Password"]}")
         else:
-            messagebox.showinfo("Oops", "No Data file found")
+            messagebox.showinfo("Error", "No Data file found")
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save():
@@ -105,24 +105,24 @@ email_label.grid(column=0, row=2)
 pass_label = Label(text="Password:")
 pass_label.grid(column=0, row=3)
 
-search_button = Button(text="Search", command=find_password)
+search_button = Button(text="Search", width=15, command=find_password)
 search_button.grid(column=2, row=1)
 
-generate_button = Button(text="Generate Password", command=generate)
+generate_button = Button(text="Generate Password", width=15, command=generate)
 generate_button.grid(column=2, row=3)
 
 add_button = Button(text="Add", width=36, command=save)
 add_button.grid(column=1, row=4, columnspan=2)
 
-web_input = Entry(width=35)
+web_input = Entry(width=30)
 web_input.grid(column=1, row=1, columnspan=1)
 web_input.focus()
 
-email_input = Entry(width=35)
+email_input = Entry(width=40)
 email_input.grid(column=1, row=2, columnspan=2)
 email_input.insert(0, "ntsmk@gmail.com")
 
-pass_input = Entry(width=21)
+pass_input = Entry(width=30)
 pass_input.grid(column=1, row=3)
 
 window.mainloop()
