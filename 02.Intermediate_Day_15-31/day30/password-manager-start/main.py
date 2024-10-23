@@ -28,6 +28,13 @@ def generate():
     pyperclip.copy(password)
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
+# todo check if the user's text entry  matches in the data.json
+# todo if yes, matches, show messagebox stating website name and password
+# todo if not, catches exception and show message "no data found" when search button is hit
+
+def find_password():
+    pass
+
 def save():
     """
     take data from the field and save it as json file
@@ -65,6 +72,7 @@ def save():
             with open("data.json", "w") as data_file:
                 # writing data
                 json.dump(data, data_file, indent=4)
+        # do it no matter issues or not
         finally:
             web_input.delete(0, END)
             pass_input.delete(0, END)
@@ -88,6 +96,9 @@ email_label.grid(column=0, row=2)
 
 pass_label = Label(text="Password:")
 pass_label.grid(column=0, row=3)
+
+# todo add search button next to the website entry
+# todo adjust layout, when search button was hit, find_password triggered
 
 generate_button = Button(text="Generate Password", command=generate)
 generate_button.grid(column=2, row=3)
