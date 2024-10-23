@@ -27,14 +27,21 @@ def generate():
     pass_input.insert(0, password)
     pyperclip.copy(password)
 
-# ---------------------------- SAVE PASSWORD ------------------------------- #
-# todo check if the user's text entry  matches in the data.json
-# todo if yes, matches, show messagebox stating website name and password
+# ---------------------------- FIND PASSWORD ------------------------------- #
 # todo if not, catches exception and show message "no data found" when search button is hit
+# current status: when it matches it shows email address and password but exception is not in yet(#6,7)
 
 def find_password():
-    pass
+    entered_website = web_input.get()
+    with open("data.json", "r") as data_file:
+        websites = json.load(data_file)
+        for data in websites:
+            if entered_website == data:
+                messagebox.showinfo(data,
+                                    f"Email: {websites[data]["email"]}\nPassword: {websites[data]["Password"]}")
 
+
+# ---------------------------- SAVE PASSWORD ------------------------------- #
 def save():
     """
     take data from the field and save it as json file
@@ -97,8 +104,8 @@ email_label.grid(column=0, row=2)
 pass_label = Label(text="Password:")
 pass_label.grid(column=0, row=3)
 
-# todo add search button next to the website entry
-# todo adjust layout, when search button was hit, find_password triggered
+search_button = Button(text="Search", command=find_password)
+search_button.grid(column=2, row=1)
 
 generate_button = Button(text="Generate Password", command=generate)
 generate_button.grid(column=2, row=3)
@@ -107,7 +114,7 @@ add_button = Button(text="Add", width=36, command=save)
 add_button.grid(column=1, row=4, columnspan=2)
 
 web_input = Entry(width=35)
-web_input.grid(column=1, row=1, columnspan=2)
+web_input.grid(column=1, row=1, columnspan=1)
 web_input.focus()
 
 email_input = Entry(width=35)
