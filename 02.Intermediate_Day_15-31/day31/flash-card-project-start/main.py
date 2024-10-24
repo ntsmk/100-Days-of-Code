@@ -24,4 +24,11 @@ left = PhotoImage(file="images/wrong.png")
 wrong_button = Button(image=left, highlightthickness=0)
 wrong_button.grid(column=0, row=1)
 
+# label
+language_french = Label(text="French", font=("Arial", 40, "italic"), bg="white")
+language_french.place(x=300, y=110)
+
+word = Label(text="word", font=("Arial", 60, "bold"),  bg="white")
+word.place(x=270, y=213)
+
 window.mainloop()
