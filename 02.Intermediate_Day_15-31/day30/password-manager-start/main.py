@@ -32,15 +32,21 @@ def generate():
 # current status: when it matches it shows email address and password but exception is not in yet(#6)
 
 def find_password():
-    entered_website = web_input.get()
-    with open("data.json", "r") as data_file:
-        websites = json.load(data_file)
-        if entered_website in websites:
-            messagebox.showinfo(entered_website,
-                                f"Email: {websites[entered_website]["email"]}\n"
-                                f"Password: {websites[entered_website]["Password"]}")
+    website = web_input.get()
+
+    try:
+        with open("data.json", "r") as data_file:
+            data = json.load(data_file)
+
+    except FileNotFoundError:
+        messagebox.showinfo("Error", "No Data file found")
+    else:
+        if website in data:
+            messagebox.showinfo(website,
+                                f"Email: {data[website]["email"]}\n"
+                                f"Password: {data[website]["Password"]}")
         else:
-            messagebox.showinfo("Error", "No Data file found")
+            messagebox.showinfo("Error", f"No details found for {website}")
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save():
