@@ -5,20 +5,18 @@ import random
 BACKGROUND_COLOR = "#B1DDC6"
 df = pandas.read_csv("data/french_words.csv")
 dict = df.to_dict(orient="records")
+current_word = random.choice(dict)
 
 # ---------------------------- NEW FLASH CARDS ------------------------------- #
 def generate():
-    thisdict = random.choice(dict)
-    canvas.itemconfig(word, text=thisdict["French"])
-    canvas.itemconfig(language,text=list(thisdict.keys())[0])
+    canvas.itemconfig(word, text=current_word["French"])
+    canvas.itemconfig(language,text=list(current_word.keys())[0])
 
 def flip():
-    # todo pick the English translation, not random word
     # todo figure out how to count 3 seconds
     # timer = window.after(1000, count_down, count-1) how to modify this
-    thisdict = random.choice(dict)
-    canvas.itemconfig(word, text=thisdict["English"], fill="White")
-    canvas.itemconfig(language,text=list(thisdict.keys())[1], fill="White")
+    canvas.itemconfig(word, text=current_word["English"], fill="White")
+    canvas.itemconfig(language,text=list(current_word.keys())[1], fill="White")
     canvas.itemconfig(canvas_image, image=back)
 
 
