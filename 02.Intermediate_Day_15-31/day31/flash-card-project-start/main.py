@@ -13,12 +13,14 @@ def generate():
     canvas.itemconfig(language,text=list(current_word.keys())[0])
 
 def flip():
-    # todo figure out how to count 3 seconds
-    # timer = window.after(1000, count_down, count-1) how to modify this
     canvas.itemconfig(word, text=current_word["English"], fill="White")
     canvas.itemconfig(language,text=list(current_word.keys())[1], fill="White")
     canvas.itemconfig(canvas_image, image=back)
 
+# todo figure it out how to cancel
+def cancel():
+    window.after_cancel(flip)
+    generate()
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -38,7 +40,7 @@ word = canvas.create_text(370, 230, text="", font=("Arial", 60, "bold"))
 
 # button
 right = PhotoImage(file="images/right.png")
-right_button = Button(image=right, highlightthickness=0, command=flip)
+right_button = Button(image=right, highlightthickness=0, command=cancel)
 right_button.grid(column=1, row=1)
 
 left = PhotoImage(file="images/wrong.png")
@@ -46,6 +48,6 @@ wrong_button = Button(image=left, highlightthickness=0, command=generate)
 wrong_button.grid(column=0, row=1)
 
 generate()
-# flip()
+window.after(3000, flip)
 
 window.mainloop()
