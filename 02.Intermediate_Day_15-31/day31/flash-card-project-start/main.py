@@ -13,6 +13,19 @@ def generate():
     word.config(text=thisdict["French"])
     language.config(text=list(thisdict.keys())[0])
 
+
+# todo Step 3 - Flip the Cards
+# IMPORTANT: PhotoImage objects should not be created inside a function. Otherwise, it will not work.
+back = PhotoImage(file="images/card_back.png")
+def flip():
+    # todo figure out how to count 3 seconds
+    thisdict = random.choice(dict)
+    word.config(text=thisdict["English"])
+    language.config(text=list(thisdict.keys())[1])
+    canvas.create_image(400,263,image=back)
+    canvas.grid(column=0, row=0, columnspan=2)
+
+
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title("Flash card app")
@@ -41,9 +54,6 @@ wrong_button = Button(image=left, highlightthickness=0, command=generate)
 wrong_button.grid(column=0, row=1)
 
 generate()
-# todo Step 3 - Flip the Cards
-# IMPORTANT: PhotoImage objects should not be created inside a function. Otherwise, it will not work.
-back = PhotoImage(file="images/card_back.png")
-
+flip()
 
 window.mainloop()
