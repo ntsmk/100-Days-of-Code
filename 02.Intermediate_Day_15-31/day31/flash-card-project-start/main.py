@@ -1,6 +1,19 @@
 from tkinter import *
+import pandas
 
 BACKGROUND_COLOR = "#B1DDC6"
+
+# ---------------------------- NEW FLASH CARDS ------------------------------- #
+# todo Step 2 - Create New Flash Cards
+# 1. Read the data from the french_words.csv file in the data folder.
+# use DataFrame.to_dict(orient="records")
+df = pandas.read_csv("data/french_words.csv")
+dict = df.to_dict(orient="records")
+print(dict)
+
+# 2. Pick a random French word/translation and put the word into the flashcard when the button was hit
+# use random function to pick up the word from dict
+
 
 # ---------------------------- UI SETUP ------------------------------- #
 
