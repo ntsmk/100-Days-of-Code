@@ -7,7 +7,6 @@ BACKGROUND_COLOR = "#B1DDC6"
 # ---------------------------- NEW FLASH CARDS ------------------------------- #
 df = pandas.read_csv("data/french_words.csv")
 dict = df.to_dict(orient="records")
-print(dict)
 
 def generate():
     thisdict = random.choice(dict)
@@ -26,10 +25,10 @@ canvas.create_image(400,263,image=front)
 canvas.grid(column=0, row=0, columnspan=2)
 
 # label
-language = Label(text="Title", font=("Arial", 40, "italic"), bg="white")
+language = Label(text="", font=("Arial", 40, "italic"), bg="white")
 language.place(x=300, y=110)
 
-word = Label(text="word", font=("Arial", 60, "bold"),  bg="white")
+word = Label(text="", font=("Arial", 60, "bold"),  bg="white")
 word.place(x=270, y=213)
 
 # button
@@ -41,6 +40,10 @@ left = PhotoImage(file="images/wrong.png")
 wrong_button = Button(image=left, highlightthickness=0, command=generate)
 wrong_button.grid(column=0, row=1)
 
+generate()
+# todo Step 3 - Flip the Cards
+# IMPORTANT: PhotoImage objects should not be created inside a function. Otherwise, it will not work.
+back = PhotoImage(file="images/card_back.png")
 
 
 window.mainloop()
