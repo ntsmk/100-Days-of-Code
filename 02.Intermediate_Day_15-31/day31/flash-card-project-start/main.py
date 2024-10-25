@@ -13,7 +13,9 @@ dict = df.to_dict(orient="records")
 print(dict)
 
 def generate():
-    print(random.choice(dict))
+    thisdict = random.choice(dict)
+    word.config(text=thisdict["French"])
+    print(thisdict.keys())
 
 # 2. Pick a random French word/translation and put the word into the flashcard when the button was hit
 # use random function to pick up the word from dict
