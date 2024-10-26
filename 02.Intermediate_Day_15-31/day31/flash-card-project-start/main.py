@@ -17,10 +17,9 @@ def flip():
     canvas.itemconfig(language,text=list(current_word.keys())[1], fill="White")
     canvas.itemconfig(canvas_image, image=back)
 
-# todo figure it out how to cancel
+# todo need to reset format and put french word again??
 def cancel():
-    window.after_cancel(flip)
-    generate()
+    window.after_cancel(timer)
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -48,6 +47,6 @@ wrong_button = Button(image=left, highlightthickness=0, command=generate)
 wrong_button.grid(column=0, row=1)
 
 generate()
-window.after(3000, flip)
+timer = window.after(3000, flip)
 
 window.mainloop()
