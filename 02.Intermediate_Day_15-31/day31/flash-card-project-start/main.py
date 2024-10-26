@@ -9,17 +9,24 @@ current_word = random.choice(dict)
 
 # ---------------------------- NEW FLASH CARDS ------------------------------- #
 def generate():
+
     canvas.itemconfig(word, text=current_word["French"])
     canvas.itemconfig(language,text=list(current_word.keys())[0])
 
 def flip():
+
     canvas.itemconfig(word, text=current_word["English"], fill="White")
     canvas.itemconfig(language,text=list(current_word.keys())[1], fill="White")
     canvas.itemconfig(canvas_image, image=back)
 
-# todo need to reset format and put french word again??
+# todo need to put new french word again
 def cancel():
     window.after_cancel(timer)
+    canvas.itemconfig(canvas_image, image=front)
+    canvas.itemconfig(language, text="", fill="Black")
+    canvas.itemconfig(word, text="", fill="Black")
+    generate()
+    window.after(3000, flip)
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -30,7 +37,7 @@ canvas = Canvas(width=800, height=526, bg=BACKGROUND_COLOR, highlightthickness=0
 window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
 front = PhotoImage(file="images/card_front.png")
 back = PhotoImage(file="images/card_back.png")
-canvas_image = canvas.create_image(400,263,image=front)
+canvas_image = canvas.create_image(400, 263, image=front)
 canvas.grid(column=0, row=0, columnspan=2)
 
 # label
