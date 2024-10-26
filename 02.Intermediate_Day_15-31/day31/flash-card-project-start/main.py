@@ -5,19 +5,21 @@ import random
 BACKGROUND_COLOR = "#B1DDC6"
 df = pandas.read_csv("data/french_words.csv")
 dict = df.to_dict(orient="records")
-current_word = random.choice(dict)
+# current_word = random.choice(dict)
+current_word = {}
 
 # ---------------------------- NEW FLASH CARDS ------------------------------- #
 def generate():
-
+    global current_word
+    current_word = random.choice(dict)
     canvas.itemconfig(word, text=current_word["French"])
-    canvas.itemconfig(language,text=list(current_word.keys())[0])
+    canvas.itemconfig(language,text="French")
 
 def flip():
-
-    canvas.itemconfig(word, text=current_word["English"], fill="White")
-    canvas.itemconfig(language,text=list(current_word.keys())[1], fill="White")
     canvas.itemconfig(canvas_image, image=back)
+    canvas.itemconfig(word, text=current_word["English"], fill="White")
+    canvas.itemconfig(language,text="English", fill="White")
+
 
 # todo need to put new french word again
 def cancel():
@@ -31,10 +33,11 @@ def cancel():
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
 window.title("Flash card app")
+window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
+timer = window.after(3000, flip)
 
 # canvas
 canvas = Canvas(width=800, height=526, bg=BACKGROUND_COLOR, highlightthickness=0)
-window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
 front = PhotoImage(file="images/card_front.png")
 back = PhotoImage(file="images/card_back.png")
 canvas_image = canvas.create_image(400, 263, image=front)
@@ -54,6 +57,5 @@ wrong_button = Button(image=left, highlightthickness=0, command=generate)
 wrong_button.grid(column=0, row=1)
 
 generate()
-timer = window.after(3000, flip)
 
 window.mainloop()
