@@ -7,7 +7,7 @@ df = pandas.read_csv("data/french_words.csv")
 dict = df.to_dict(orient="records")
 # current_word = random.choice(dict)
 current_word = {}
-
+# todo Step 4 - Save Your Progress
 # ---------------------------- NEW FLASH CARDS ------------------------------- #
 def generate():
     global current_word
@@ -20,8 +20,6 @@ def flip():
     canvas.itemconfig(word, text=current_word["English"], fill="White")
     canvas.itemconfig(language,text="English", fill="White")
 
-
-# todo need to put new french word again
 def cancel():
     window.after_cancel(timer)
     canvas.itemconfig(canvas_image, image=front)
