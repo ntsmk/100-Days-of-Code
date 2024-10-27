@@ -5,28 +5,32 @@ import random
 BACKGROUND_COLOR = "#B1DDC6"
 df = pandas.read_csv("data/french_words.csv")
 dict = df.to_dict(orient="records")
-# current_word = random.choice(dict)
 current_word = {}
-# todo Step 4 - Save Your Progress
-# ---------------------------- NEW FLASH CARDS ------------------------------- #
+
+# ---------------------------- FLASH CARDS ------------------------------- #
 def generate():
     global current_word
+
     current_word = random.choice(dict)
-    canvas.itemconfig(word, text=current_word["French"])
-    canvas.itemconfig(language,text="French")
+    canvas.itemconfig(canvas_image, image=front)
+    canvas.itemconfig(word, text=current_word["French"], fill="Black")
+    canvas.itemconfig(language,text="French", fill="Black")
+    window.after_cancel(timer)
+    window.after(3000, flip)
 
 def flip():
     canvas.itemconfig(canvas_image, image=back)
     canvas.itemconfig(word, text=current_word["English"], fill="White")
     canvas.itemconfig(language,text="English", fill="White")
 
-def cancel():
-    window.after_cancel(timer)
-    canvas.itemconfig(canvas_image, image=front)
-    canvas.itemconfig(language, text="", fill="Black")
-    canvas.itemconfig(word, text="", fill="Black")
+
+# todo Step 4 - Save Your Progress
+def check():
+    dict.remove(current_word)
+    new_df = pandas.DataFrame.from_dict(dict)
+    new_df.to_csv("data/words_to_learn.csv", index=False)
     generate()
-    window.after(3000, flip)
+
 
 # ---------------------------- UI SETUP ------------------------------- #
 window = Tk()
@@ -47,7 +51,7 @@ word = canvas.create_text(370, 230, text="", font=("Arial", 60, "bold"))
 
 # button
 right = PhotoImage(file="images/right.png")
-right_button = Button(image=right, highlightthickness=0, command=cancel)
+right_button = Button(image=right, highlightthickness=0, command=check)
 right_button.grid(column=1, row=1)
 
 left = PhotoImage(file="images/wrong.png")
