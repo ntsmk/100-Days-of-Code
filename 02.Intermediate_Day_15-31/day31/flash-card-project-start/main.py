@@ -25,6 +25,7 @@ def flip():
 
 
 # todo Step 4 - Save Your Progress
+# already saving the CSV file, converting to CSV. Using all hints provided. Need to figure out what is rest of tasks
 def check():
     dict.remove(current_word)
     new_df = pandas.DataFrame.from_dict(dict)
