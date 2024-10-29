@@ -26,6 +26,7 @@ def flip():
 
 # todo Step 4 - Save Your Progress
 # already saving the CSV file, converting to CSV. Using all hints provided. Need to figure out what is rest of tasks
+# The next time the program is run, it should check if there is a words_to_learn.csv file.
 def check():
     dict.remove(current_word)
     new_df = pandas.DataFrame.from_dict(dict)
