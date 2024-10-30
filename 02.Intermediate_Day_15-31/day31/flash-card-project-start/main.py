@@ -3,7 +3,12 @@ import pandas
 import random
 
 BACKGROUND_COLOR = "#B1DDC6"
-df = pandas.read_csv("data/french_words.csv")
+
+try:
+    df = pandas.read_csv("data/words_to_learn.csv")
+except FileNotFoundError:
+    df = pandas.read_csv("data/french_words.csv")
+
 dict = df.to_dict(orient="records")
 current_word = {}
 
@@ -23,10 +28,6 @@ def flip():
     canvas.itemconfig(word, text=current_word["English"], fill="White")
     canvas.itemconfig(language,text="English", fill="White")
 
-
-# todo Step 4 - Save Your Progress
-# already saving the CSV file, converting to CSV. Using all hints provided. Need to figure out what is rest of tasks
-# The next time the program is run, it should check if there is a words_to_learn.csv file.
 def check():
     dict.remove(current_word)
     new_df = pandas.DataFrame.from_dict(dict)
