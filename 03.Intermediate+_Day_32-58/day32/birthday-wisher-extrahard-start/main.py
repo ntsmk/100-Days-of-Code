@@ -1,6 +1,7 @@
 import smtplib
 import datetime as dt
 import pandas
+import random
 
 now = dt.datetime.now()
 current_month = now.month
@@ -15,10 +16,16 @@ for i in range(len(dict)):
         print(the_name)
         print(the_email)
 
-# 3. If step 2 is true, pick a random letter from letter templates and replace the [NAME] with the person's actual name from birthdays.csv
-# todo need to work on this
+random_number = random.randint(1,3)
+with open(f"letter_templates/letter_{random_number}.txt") as file:
+    f = file.read()
+    try:
+        replaced_text = f.replace("[NAME]", the_name)
+        print(replaced_text)
+    except NameError:
+        print("the birthday person not found")
 
-# 4. Send the letter generated in step 3 to that person's email address.
+
 my_email = "whereismycoffee9@gmail.com"
 password = ""
 def send_email():
@@ -27,7 +34,7 @@ def send_email():
         connection.login(user=my_email, password=password)
         connection.sendmail(from_addr=my_email,
                             to_addrs=the_email,
-                            msg=f"Subject:Happy Birthday\n\n{random_letter}")
+                            msg=f"Subject:Happy Birthday\n\n{replaced_text}")
 
-
-
+if the_name != "":
+    send_email()
