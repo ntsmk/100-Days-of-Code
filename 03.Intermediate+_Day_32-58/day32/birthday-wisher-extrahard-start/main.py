@@ -28,8 +28,7 @@ for i in range(len(dict)):
     if dict[i]['month'] == current_month and dict[i]['day'] == current_day:
         the_name = dict[i]['name']
         the_email = dict[i]['email']
-        random_number = random.randint(1, 3)
-        with open(f"letter_templates/letter_{random_number}.txt") as file:
+        with open(f"letter_templates/letter_{random.randint(1, 3)}.txt") as file:
             f = file.read()
             replaced_text = f.replace("[NAME]", the_name)
         send_email()
