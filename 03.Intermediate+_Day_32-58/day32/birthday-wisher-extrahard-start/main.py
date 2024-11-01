@@ -11,7 +11,7 @@ df = pandas.read_csv("birthdays.csv")
 dict = df.to_dict(orient="records")
 
 my_email = "whereismycoffee9@gmail.com"
-password = ""
+password = "gwhvyxuczlqgkmaq"
 
 replaced_text = ""
 
