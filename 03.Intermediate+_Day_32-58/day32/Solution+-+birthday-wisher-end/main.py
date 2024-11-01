@@ -21,8 +21,12 @@ data = pandas.read_csv("birthdays.csv")
 # todo need to review dict comprehension
 birthdays_dict = {(data_row["month"], data_row["day"]): data_row for (index, data_row) in data.iterrows()}
 
-print(birthdays_dict)
-print(type(birthdays_dict))
+# print(data.iterrows())
+# print(birthdays_dict)
+print(birthdays_dict.keys())
+# print(birthdays_dict.values())
+# print(type(birthdays_dict))
+# print(type(birthdays_dict[(11, 1)]))
 
 if today_tuple in birthdays_dict:
     birthday_person = birthdays_dict[today_tuple]
