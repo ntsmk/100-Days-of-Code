@@ -1,4 +1,5 @@
 import requests
+from datetime import datetime
 
 MY_LAT = 60.719560486554776
 MY_LNG = -135.05267151196642
@@ -23,5 +24,12 @@ parameters = {
 response = requests.get(url="https://api.sunrise-sunset.org/json", params=parameters)
 response.raise_for_status()
 data = response.json()
+sunrise = data["results"]["sunrise"]
+sunset = data["results"]["sunset"]
 
-print(data)
+
+print(sunrise)
+print(sunset)
+
+time_now = datetime.now()
+print(time_now)
