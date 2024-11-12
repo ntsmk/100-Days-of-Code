@@ -1,9 +1,14 @@
 import requests
 from datetime import datetime
+import smtplib
 
-MY_LAT = 60.721188 # Your latitude
-MY_LONG = -135.056839 # Your longitude
+my_email = "whereismycoffee9@gmail.com"
+password = ""
 
+MY_LAT = 60.721188 # Whitehorse latitude
+MY_LONG = -135.056839 # Whitehorse longitude
+
+# API 1: ISS location
 response = requests.get(url="http://api.open-notify.org/iss-now.json")
 response.raise_for_status()
 data = response.json()
@@ -18,26 +23,35 @@ parameters = {
     "formatted": 0,
 }
 
+# API 2 sunrise/sunset time
 response = requests.get("https://api.sunrise-sunset.org/json", params=parameters)
 response.raise_for_status()
 data = response.json()
 sunrise = int(data["results"]["sunrise"].split("T")[1].split(":")[0])
 sunset = int(data["results"]["sunset"].split("T")[1].split(":")[0])
 
-time_now = datetime.now()
+time_now_hour = datetime.now().hour
 
 #If the ISS is close to my current position (condition 1)
 #Your position is within +5 or -5 degrees of the ISS position.
-print(iss_latitude)
-print(iss_longitude)
-
 # and it is currently dark (and condition 2)
 # Then send me an email to tell me to look up. (action to take)
-# BONUS: run the code every 60 seconds. (after think)
-
-# there are 3 tasks, need to make it more clear
-
+# print(iss_latitude)
+# print(iss_longitude)
 print(sunrise)
 print(sunset)
-# print(data)
-print(time_now)
+print(time_now_hour)
+
+if iss_latitude -5 <= MY_LAT <= iss_latitude +5 and iss_longitude -5 <= MY_LONG <= iss_longitude +5 and time_now_hour > sunset:
+    with smtplib.SMTP("smtp.gmail.com") as connection:
+        connection.starttls()
+        connection.login(user=my_email, password=password)
+        connection.sendmail(from_addr=my_email,
+                            to_addrs=my_email,
+                            msg=f"Subject:ISS is close by\n\nCheck the sky. Look up!")
+    print("email sent")
+else:
+    print("ISS is not close by")
+
+# BONUS: run the code every 60 seconds.
+
