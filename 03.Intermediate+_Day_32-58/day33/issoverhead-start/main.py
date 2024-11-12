@@ -31,7 +31,9 @@ time_now = datetime.now()
 #If the ISS is close to my current position
 # and it is currently dark
 # Then send me an email to tell me to look up.
-# BONUS: run the code every 60 seconds.
+# BONUS: run the code every 60 seconds. (task 3)
 
+# there are 3 tasks, need to make it more clear
 
-
+print(sunrise)
+print(sunset)
