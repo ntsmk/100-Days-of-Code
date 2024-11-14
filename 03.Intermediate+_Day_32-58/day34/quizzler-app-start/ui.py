@@ -13,12 +13,19 @@ class QuizInterface:
         canvas = Canvas(width=300, height=250, bg="White")
         canvas.grid(column=0, row=1, columnspan=2)
 
-        score = Label(text="Score:0")
+        score = Label(text="Score:0", fg="white", bg=THEME_COLOR)
         score.grid(column=1, row=0)
 
-        true_button = PhotoImage(file="images/true.png")
+        text = Label(text="this is test", bg="white", font=("Arial", 20, "italic"))
+        text.grid(column=0, row=1, columnspan=2)
 
-        false_button = PhotoImage(file="images/false.png")
+        true_button_img = PhotoImage(file="images/true.png")
+        true_button = Button(image=true_button_img, highlightthickness=0)
+        true_button.grid(column=0, row=2)
+
+        false_button_img = PhotoImage(file="images/false.png")
+        false_button = Button(image=false_button_img, highlightthickness=0)
+        false_button.grid(column=1, row=2)
 
 
         self.window.mainloop()
