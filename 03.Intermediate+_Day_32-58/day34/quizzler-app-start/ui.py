@@ -1,6 +1,5 @@
 from tkinter import *
 
-
 THEME_COLOR = "#375362"
 
 class QuizInterface:
@@ -16,8 +15,7 @@ class QuizInterface:
         score = Label(text="Score:0", fg="white", bg=THEME_COLOR)
         score.grid(column=1, row=0)
 
-        text = Label(text="this is test", bg="white", font=("Arial", 20, "italic"))
-        text.grid(column=0, row=1, columnspan=2)
+        canvas.create_text(150, 125, text="Dream is the most important. Even more important than actual life. Dream won’t die.", font=("Arial", 20, "italic"), width=260)
 
         true_button_img = PhotoImage(file="images/true.png")
         true_button = Button(image=true_button_img, highlightthickness=0)
