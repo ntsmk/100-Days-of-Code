@@ -7,15 +7,17 @@ class QuizInterface:
         self.window = Tk()
         self.window.title("Quizzler")
 
-        # todo set up UI here 6 grids - > look for reference
+        # todo set up the actual text and set up padding as well?
         self.window.config(padx=20, pady=20, bg=THEME_COLOR)
+
         canvas = Canvas(width=300, height=250, bg="White")
         canvas.grid(column=0, row=1, columnspan=2)
+        canvas.create_text(150, 125,
+                           text="Dream is the most important. Even more important than actual life. Dream won’t die.",
+                           font=("Arial", 20, "italic"), width=260)
 
         score = Label(text="Score:0", fg="white", bg=THEME_COLOR)
         score.grid(column=1, row=0)
-
-        canvas.create_text(150, 125, text="Dream is the most important. Even more important than actual life. Dream won’t die.", font=("Arial", 20, "italic"), width=260)
 
         true_button_img = PhotoImage(file="images/true.png")
         true_button = Button(image=true_button_img, highlightthickness=0)
