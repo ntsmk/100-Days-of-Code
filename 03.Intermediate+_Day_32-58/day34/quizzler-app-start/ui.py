@@ -1,9 +1,10 @@
 from tkinter import *
+from quiz_brain import QuizBrain
 
 THEME_COLOR = "#375362"
 
 class QuizInterface:
-    def __init__(self, quiz_brain):
+    def __init__(self, quiz_brain: QuizBrain):
         self.quiz = quiz_brain
         self.window = Tk()
         self.window.title("Quizzler")
@@ -14,7 +15,7 @@ class QuizInterface:
 
         self.canvas = Canvas(width=300, height=250, bg="White")
         self.canvas.grid(column=0, row=1, columnspan=2, pady=50)
-        self.canvas.create_text(150,
+        self.question_text = self.canvas.create_text(150,
                                 125,
                            text="Dream is the most important. Even more important than actual life. Dream won’t die.",
                            font=("Arial", 20, "italic"), width=260)
@@ -27,8 +28,10 @@ class QuizInterface:
         self.false_button = Button(image=false_button_img, highlightthickness=0)
         self.false_button.grid(column=1, row=2)
 
-
+        self.get_next_question()
         self.window.mainloop()
 
     def get_next_question(self):
-        self.quiz.next_question
+        q_text = self.quiz.next_question()
+        self.canvas.itemconfig(self.question_text, text=q_text)
+
