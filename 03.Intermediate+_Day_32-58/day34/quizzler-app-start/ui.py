@@ -42,8 +42,12 @@ class QuizInterface:
         self.give_feedback(self.quiz.check_answer("False"))
 
     def give_feedback(self, is_right):
-        self.window.after(1000)
+        self.window.after(1000,)
+
+        # timer = window.after(1000, count_down, count-1)
+        # something like this, after 1000, the method should come
         # todo 1 change the color green if it is true, to red if it is false
+        # needs to create function to change color each??
         # todo 2 change the background color to white and show next question
 
 
