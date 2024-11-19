@@ -33,6 +33,7 @@ class QuizInterface:
     def get_next_question(self):
         q_text = self.quiz.next_question()
         self.canvas.itemconfig(self.question_text, text=q_text)
+        self.canvas.config(bg="White")
 
     def true_pressed(self):
         is_right = self.quiz.check_answer("True")
@@ -43,14 +44,11 @@ class QuizInterface:
         self.give_feedback(is_right)
 
     def give_feedback(self, is_right):
-        # self.window.after(1000,)
-
-        # timer = window.after(1000, count_down, count-1)
-        # something like this, after 1000, the method should come
         if is_right:
             self.canvas.config(bg="Green")
         else:
             self.canvas.config(bg="Red")
-        # todo 2 change the background color to white and show next question
+
+        self.window.after(2000, self.get_next_question)
 
 
