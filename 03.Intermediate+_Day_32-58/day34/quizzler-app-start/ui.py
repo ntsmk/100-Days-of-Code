@@ -15,8 +15,7 @@ class QuizInterface:
 
         self.canvas = Canvas(width=300, height=250, bg="White")
         self.canvas.grid(column=0, row=1, columnspan=2, pady=50)
-        self.question_text = self.canvas.create_text(150,
-                                125,
+        self.question_text = self.canvas.create_text(150, 125,
                            text="Dream is the most important. Even more important than actual life. Dream won’t die.",
                            font=("Arial", 20, "italic"), width=260)
 
@@ -36,18 +35,22 @@ class QuizInterface:
         self.canvas.itemconfig(self.question_text, text=q_text)
 
     def true_pressed(self):
-        self.give_feedback(self.quiz.check_answer("True"))
+        is_right = self.quiz.check_answer("True")
+        self.give_feedback(is_right)
 
     def false_pressed(self):
-        self.give_feedback(self.quiz.check_answer("False"))
+        is_right = self.quiz.check_answer("False")
+        self.give_feedback(is_right)
 
     def give_feedback(self, is_right):
-        self.window.after(1000,)
+        # self.window.after(1000,)
 
         # timer = window.after(1000, count_down, count-1)
         # something like this, after 1000, the method should come
-        # todo 1 change the color green if it is true, to red if it is false
-        # needs to create function to change color each??
+        if is_right:
+            self.canvas.config(bg="Green")
+        else:
+            self.canvas.config(bg="Red")
         # todo 2 change the background color to white and show next question
 
 
