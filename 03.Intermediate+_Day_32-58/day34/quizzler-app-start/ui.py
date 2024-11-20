@@ -5,6 +5,7 @@ THEME_COLOR = "#375362"
 
 class QuizInterface:
     def __init__(self, quiz_brain: QuizBrain):
+
         self.quiz = quiz_brain
         self.window = Tk()
         self.window.title("Quizzler")
@@ -32,6 +33,7 @@ class QuizInterface:
 
     def get_next_question(self):
         q_text = self.quiz.next_question()
+        self.score.config(text=f"Score: {self.quiz.score}")
         self.canvas.itemconfig(self.question_text, text=q_text)
         self.canvas.config(bg="White")
 
