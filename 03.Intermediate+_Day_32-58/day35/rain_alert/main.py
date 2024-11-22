@@ -1,6 +1,6 @@
 import requests
 
-api_key = "a2b44f595520910382407a3218b16b9b"
+api_key = ""
 endpoint = "https://api.openweathermap.org/data/2.5/forecast"
 MY_LAT = 49.695596
 MY_LONG = -124.990431
