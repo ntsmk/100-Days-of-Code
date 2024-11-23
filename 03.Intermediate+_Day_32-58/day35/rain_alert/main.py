@@ -1,7 +1,13 @@
 import requests
+from twilio.rest import Client
+
 
 api_key = ""
 endpoint = "https://api.openweathermap.org/data/2.5/forecast"
+
+account_sid = ''
+auth_token = ''
+
 MY_LAT = 49.695596
 MY_LONG = -124.990431
 COUNT = 4
@@ -22,8 +28,13 @@ print(data)
 condition_list = []
 for i in range(COUNT):
     condition_list.append(data["list"][i]["weather"][0]["id"])
-# for i in condition_list:
-#     if i < 700:
-#         print("bring your umbrella")
+
 if any(x < 700 for x in condition_list):
-    print("bring your umbrella")
+    client = Client(account_sid, auth_token)
+    message = client.messages.create(
+        from_='',
+        body='Hello it is going to rain, bring your umbrella',
+        to=''
+    )
+
+    print(message.status)
