@@ -5,11 +5,11 @@ from twilio.rest import Client
 api_key = ""
 endpoint = "https://api.openweathermap.org/data/2.5/forecast"
 
-account_sid = ''
-auth_token = ''
+account_sid = ""
+auth_token = ""
 
-MY_LAT = 49.695596
-MY_LONG = -124.990431
+MY_LAT = 49.280401
+MY_LONG = -123.118403
 COUNT = 4
 
 parameters = {
@@ -32,9 +32,9 @@ for i in range(COUNT):
 if any(x < 700 for x in condition_list):
     client = Client(account_sid, auth_token)
     message = client.messages.create(
-        from_='',
-        body='Hello it is going to rain, bring your umbrella',
-        to=''
+        from_="",
+        body="Hello it is going to rain, bring your umbrella ☂️☂️",
+        to=""
     )
 
     print(message.status)
