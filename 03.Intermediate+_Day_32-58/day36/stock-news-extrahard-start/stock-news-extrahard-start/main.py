@@ -26,13 +26,22 @@ response.raise_for_status()
 data = response.json()
 print(response.status_code)
 print(data)
-today_open = data["Time Series (Daily)"][today]["1. open"]
+today_open = float(data["Time Series (Daily)"][today]["1. open"])
 print(f"Today's open price: {today_open}")
-yesterday_open = data["Time Series (Daily)"][yesterday]["1. open"]
+yesterday_open = float(data["Time Series (Daily)"][yesterday]["1. open"])
 print(f"Yesterday's open price: {yesterday_open}")
+day_before_yesterday_open = float(data["Time Series (Daily)"][day_before_yesterday]["1. open"])
+print(f"day before yesterday open price: {day_before_yesterday_open}")
+
+percent = day_before_yesterday_open / yesterday_open
+print(percent)
+if percent >= 1.05 or percent <= 0.95:
+    print("Get News!")
+
 # day_before_yesterday_open = data["Time Series (Daily)"][day_before_yesterday]["1. open"]
 # print(f"Yesterday's open price: {day_before_yesterday_open}")
 # todo how to check day before yesterday if it is Friday or not?
+#  -> ignore for now? if today is wed, thu, fri, sat, it works
 
 ## STEP 2: Use https://newsapi.org
 # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
