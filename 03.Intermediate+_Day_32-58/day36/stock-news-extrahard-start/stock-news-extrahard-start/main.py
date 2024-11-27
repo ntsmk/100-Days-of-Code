@@ -17,6 +17,7 @@ STOCK_END_POINT = "https://www.alphavantage.co/query"
 parameters = {
     "function": "TIME_SERIES_DAILY",
     "symbol": STOCK,
+    "outputsize": "compact",
     "apikey": API_KEY,
 }
 
