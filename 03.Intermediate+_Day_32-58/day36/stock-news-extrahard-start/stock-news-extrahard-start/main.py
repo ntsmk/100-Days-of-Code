@@ -1,7 +1,12 @@
 import requests
+from datetime import date, timedelta
 
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
+today = str(date.today())
+yesterday = str(date.today() - timedelta(1))
+day_before_yesterday = str(date.today() - timedelta(2))
+
 
 ## STEP 1: Use https://www.alphavantage.co
 # When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
@@ -20,6 +25,13 @@ response.raise_for_status()
 data = response.json()
 print(response.status_code)
 print(data)
+today_open = data["Time Series (Daily)"][today]["1. open"]
+print(f"Today's open price: {today_open}")
+yesterday_open = data["Time Series (Daily)"][yesterday]["1. open"]
+print(f"Yesterday's open price: {yesterday_open}")
+# day_before_yesterday_open = data["Time Series (Daily)"][day_before_yesterday]["1. open"]
+# print(f"Yesterday's open price: {day_before_yesterday_open}")
+# todo how to check day before yesterday if it is Friday or not?
 
 ## STEP 2: Use https://newsapi.org
 # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
