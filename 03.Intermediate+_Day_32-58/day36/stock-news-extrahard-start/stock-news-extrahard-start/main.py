@@ -11,26 +11,26 @@ day_before_yesterday = str(date.today() - timedelta(2))
 ## STEP 1: Use https://www.alphavantage.co
 # When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
 
-API_KEY = ""
+STOCK_API_KEY = ""
 STOCK_END_POINT = "https://www.alphavantage.co/query"
 
-parameters = {
+stock_parameters = {
     "function": "TIME_SERIES_DAILY",
     "symbol": STOCK,
     "outputsize": "compact",
-    "apikey": API_KEY,
+    "apikey": STOCK_API_KEY,
 }
 
-response = requests.get(url=STOCK_END_POINT, params=parameters)
-response.raise_for_status()
-data = response.json()
-print(response.status_code)
-print(data)
-today_open = float(data["Time Series (Daily)"][today]["1. open"])
-print(f"Today's open price: {today_open}")
-yesterday_open = float(data["Time Series (Daily)"][yesterday]["1. open"])
+response_1 = requests.get(url=STOCK_END_POINT, params=stock_parameters)
+response_1.raise_for_status()
+data_1 = response_1.json()
+print(response_1.status_code)
+print(data_1)
+# today_open = float(data["Time Series (Daily)"][today]["1. open"])
+# print(f"Today's open price: {today_open}")
+yesterday_open = float(data_1["Time Series (Daily)"][yesterday]["1. open"])
 print(f"Yesterday's open price: {yesterday_open}")
-day_before_yesterday_open = float(data["Time Series (Daily)"][day_before_yesterday]["1. open"])
+day_before_yesterday_open = float(data_1["Time Series (Daily)"][day_before_yesterday]["1. open"])
 print(f"day before yesterday open price: {day_before_yesterday_open}")
 
 percent = day_before_yesterday_open / yesterday_open
@@ -42,9 +42,30 @@ if percent >= 1.05 or percent <= 0.95:
 # print(f"Yesterday's open price: {day_before_yesterday_open}")
 # todo how to check day before yesterday if it is Friday or not?
 #  -> ignore for now? if today is wed, thu, fri, sat, it works
+#   NOTE: Nov 28 is Thursday but US stock is closed because Thanksgiving
 
 ## STEP 2: Use https://newsapi.org
 # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
+
+NEWS_END_POINT = "https://newsapi.org/v2/everything"
+NEWS_API_KEY = ""
+
+news_parameters = {
+    "q": COMPANY_NAME,
+    "language": "en",
+    "apikey": NEWS_API_KEY,
+}
+
+response_2 = requests.get(url=NEWS_END_POINT, params=news_parameters)
+response_2.raise_for_status()
+data_2 = response_2.json()
+print(response_2.status_code)
+print(data_2)
+for i in range(3):
+    headline = data_2["articles"][i]["title"]
+    print(f"Headline {i+1}: {headline}")
+    brief = data_2["articles"][i]["description"]
+    print(f"Brief {i+1}: {brief}")
 
 ## STEP 3: Use https://www.twilio.com
 # Send a seperate message with the percentage change and each article's title and description to your phone number. 
