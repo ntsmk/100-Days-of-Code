@@ -1,5 +1,6 @@
 import requests
 from datetime import date, timedelta
+from twilio.rest import Client
 
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
@@ -26,16 +27,18 @@ response_1.raise_for_status()
 data_1 = response_1.json()
 print(response_1.status_code)
 print(data_1)
-# today_open = float(data["Time Series (Daily)"][today]["1. open"])
-# print(f"Today's open price: {today_open}")
+today_open = float(data_1["Time Series (Daily)"][today]["1. open"])
+print(f"Today's open price: {today_open}")
 yesterday_open = float(data_1["Time Series (Daily)"][yesterday]["1. open"])
 print(f"Yesterday's open price: {yesterday_open}")
 day_before_yesterday_open = float(data_1["Time Series (Daily)"][day_before_yesterday]["1. open"])
 print(f"day before yesterday open price: {day_before_yesterday_open}")
-
-percent = day_before_yesterday_open / yesterday_open
+print("The market was closed")
+decimal = day_before_yesterday_open / yesterday_open
+print(decimal)
+percent = "{:.0%}".format(decimal)
 print(percent)
-if percent >= 1.05 or percent <= 0.95:
+if decimal >= 1.01 or decimal <= 0.99:
     print("Get News!")
 
 # day_before_yesterday_open = data["Time Series (Daily)"][day_before_yesterday]["1. open"]
@@ -61,6 +64,7 @@ response_2.raise_for_status()
 data_2 = response_2.json()
 print(response_2.status_code)
 print(data_2)
+contents = ""
 for i in range(3):
     headline = data_2["articles"][i]["title"]
     print(f"Headline {i+1}: {headline}")
@@ -69,8 +73,18 @@ for i in range(3):
 
 ## STEP 3: Use https://www.twilio.com
 # Send a seperate message with the percentage change and each article's title and description to your phone number. 
+account_sid = ""
+auth_token = ""
 
+if decimal >= 1.01 or decimal <= 0.99:
+    client = Client(account_sid, auth_token)
+    message = client.messages.create(
+        from_="",
+        body=f"{STOCK}: {percent}\nHeadline: {data_2["articles"][0]["title"]}\nBrief: {data_2["articles"][0]["description"]}",
+        to=""
+    )
 
+# todo figure out how to set 🔺2% 🔻5%, now it is "102%" not 🔺2%
 #Optional: Format the SMS message like this: 
 """
 TSLA: 🔺2%
