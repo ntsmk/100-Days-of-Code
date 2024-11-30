@@ -6,8 +6,7 @@ STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
 today = str(date.today())
 yesterday = str(date.today() - timedelta(1))
-day_before_yesterday = str(date.today() - timedelta(2))
-
+day_before_yesterday = str(date.today() - timedelta(3))
 
 ## STEP 1: Use https://www.alphavantage.co
 # When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
@@ -27,6 +26,7 @@ response_1.raise_for_status()
 data_1 = response_1.json()
 print(response_1.status_code)
 print(data_1)
+
 today_open = float(data_1["Time Series (Daily)"][today]["1. open"])
 print(f"Today's open price: {today_open}")
 yesterday_open = float(data_1["Time Series (Daily)"][yesterday]["1. open"])
@@ -34,10 +34,17 @@ print(f"Yesterday's open price: {yesterday_open}")
 day_before_yesterday_open = float(data_1["Time Series (Daily)"][day_before_yesterday]["1. open"])
 print(f"day before yesterday open price: {day_before_yesterday_open}")
 print("The market was closed")
+
 decimal = day_before_yesterday_open / yesterday_open
 print(decimal)
 percent = "{:.0%}".format(decimal)
 print(percent)
+
+if decimal > 1:
+    final_percent = ("🔺"+ percent[2:])
+elif decimal < 1:
+    final_percent = ("🔻"+ percent[2:])
+
 if decimal >= 1.01 or decimal <= 0.99:
     print("Get News!")
 
@@ -79,12 +86,11 @@ auth_token = ""
 if decimal >= 1.01 or decimal <= 0.99:
     client = Client(account_sid, auth_token)
     message = client.messages.create(
-        from_="",
-        body=f"{STOCK}: {percent}\nHeadline: {data_2["articles"][0]["title"]}\nBrief: {data_2["articles"][0]["description"]}",
+        from_="+19786432271",
+        body=f"{STOCK}: {final_percent}\nHeadline: {data_2["articles"][0]["title"]}\nBrief: {data_2["articles"][0]["description"]}",
         to=""
     )
 
-# todo figure out how to set 🔺2% 🔻5%, now it is "102%" not 🔺2%
 #Optional: Format the SMS message like this: 
 """
 TSLA: 🔺2%
@@ -95,4 +101,3 @@ or
 Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
 Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the coronavirus market crash.
 """
-
