@@ -27,6 +27,9 @@ data_1 = response_1.json()
 print(response_1.status_code)
 print(data_1)
 
+# todo figure it out how to use this 
+# data_list = [value for (key, value) in data_1.items()]
+# print(data_list)
 today_open = float(data_1["Time Series (Daily)"][today]["1. open"])
 print(f"Today's open price: {today_open}")
 yesterday_open = float(data_1["Time Series (Daily)"][yesterday]["1. open"])
