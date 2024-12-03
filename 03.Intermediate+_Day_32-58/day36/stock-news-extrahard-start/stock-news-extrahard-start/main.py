@@ -4,9 +4,9 @@ from twilio.rest import Client
 
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
-today = str(date.today())
-yesterday = str(date.today() - timedelta(1))
-day_before_yesterday = str(date.today() - timedelta(3))
+# today = str(date.today())
+# yesterday = str(date.today() - timedelta(1))
+# day_before_yesterday = str(date.today() - timedelta(3))
 
 ## STEP 1: Use https://www.alphavantage.co
 # When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
@@ -23,44 +23,40 @@ stock_parameters = {
 
 response_1 = requests.get(url=STOCK_END_POINT, params=stock_parameters)
 response_1.raise_for_status()
-data_1 = response_1.json()
+data_1 = response_1.json()["Time Series (Daily)"]
 print(response_1.status_code)
 print(data_1)
 
-# todo figure it out how to use this 
-# data_list = [value for (key, value) in data_1.items()]
-# print(data_list)
-today_open = float(data_1["Time Series (Daily)"][today]["1. open"])
-print(f"Today's open price: {today_open}")
-yesterday_open = float(data_1["Time Series (Daily)"][yesterday]["1. open"])
-print(f"Yesterday's open price: {yesterday_open}")
-day_before_yesterday_open = float(data_1["Time Series (Daily)"][day_before_yesterday]["1. open"])
-print(f"day before yesterday open price: {day_before_yesterday_open}")
-print("The market was closed")
-
-decimal = day_before_yesterday_open / yesterday_open
+data_list = [value for (key, value) in data_1.items()]
+yesterday_close = float(data_list[1]['4. close'])
+day_before_yesterday_close = float(data_list[2]['4. close'])
+# today_open = float(data_1["Time Series (Daily)"][today]["1. open"])
+# print(f"Today's open price: {today_open}")
+# yesterday_open = float(data_1["Time Series (Daily)"][yesterday]["1. open"])
+# print(f"Yesterday's open price: {yesterday_open}")
+# day_before_yesterday_open = float(data_1["Time Series (Daily)"][day_before_yesterday]["1. open"])
+# print(f"day before yesterday open price: {day_before_yesterday_open}")
+# decimal = day_before_yesterday_open / yesterday_open
+decimal = day_before_yesterday_close / yesterday_close
 print(decimal)
 percent = "{:.0%}".format(decimal)
 print(percent)
-
-if decimal > 1:
-    final_percent = ("🔺"+ percent[2:])
-elif decimal < 1:
-    final_percent = ("🔻"+ percent[2:])
+print(type(percent))
 
 if decimal >= 1.01 or decimal <= 0.99:
     print("Get News!")
 
-# day_before_yesterday_open = data["Time Series (Daily)"][day_before_yesterday]["1. open"]
-# print(f"Yesterday's open price: {day_before_yesterday_open}")
-# todo how to check day before yesterday if it is Friday or not?
-#  -> ignore for now? if today is wed, thu, fri, sat, it works
-#   NOTE: Nov 28 is Thursday but US stock is closed because Thanksgiving
+# # day_before_yesterday_open = data["Time Series (Daily)"][day_before_yesterday]["1. open"]
+# # print(f"Yesterday's open price: {day_before_yesterday_open}")
+# # todo how to check day before yesterday if it is Friday or not?
+# #  -> ignore for now? if today is wed, thu, fri, sat, it works
+# #   NOTE: Nov 28 is Thursday but US stock is closed because Thanksgiving
+# --> used list comprehension
 
 ## STEP 2: Use https://newsapi.org
-# Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
+# Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
 
-NEWS_END_POINT = "https://newsapi.org/v2/everything"
+NEWS_END_POINT = ""
 NEWS_API_KEY = ""
 
 news_parameters = {
@@ -82,9 +78,14 @@ for i in range(3):
     print(f"Brief {i+1}: {brief}")
 
 ## STEP 3: Use https://www.twilio.com
-# Send a seperate message with the percentage change and each article's title and description to your phone number. 
+# Send a seperate message with the percentage change and each article's title and description to your phone number.
 account_sid = ""
 auth_token = ""
+
+if decimal > 1:
+    final_percent = ("🔺"+ percent[2:])
+elif decimal < 1:
+    final_percent = ("🔻"+ str(10-int(percent[1]))+"%")
 
 if decimal >= 1.01 or decimal <= 0.99:
     client = Client(account_sid, auth_token)
