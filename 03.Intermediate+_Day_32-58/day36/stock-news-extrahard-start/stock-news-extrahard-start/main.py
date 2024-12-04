@@ -37,6 +37,8 @@ day_before_yesterday_close = float(data_list[2]['4. close'])
 # day_before_yesterday_open = float(data_1["Time Series (Daily)"][day_before_yesterday]["1. open"])
 # print(f"day before yesterday open price: {day_before_yesterday_open}")
 # decimal = day_before_yesterday_open / yesterday_open
+
+# instead of dividing, you could also use abs() function and subtract it
 decimal = day_before_yesterday_close / yesterday_close
 print(decimal)
 percent = "{:.0%}".format(decimal)
@@ -56,7 +58,7 @@ if decimal >= 1.01 or decimal <= 0.99:
 ## STEP 2: Use https://newsapi.org
 # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
 
-NEWS_END_POINT = ""
+NEWS_END_POINT = "https://newsapi.org/v2/everything"
 NEWS_API_KEY = ""
 
 news_parameters = {
@@ -71,6 +73,7 @@ data_2 = response_2.json()
 print(response_2.status_code)
 print(data_2)
 contents = ""
+# instead of using for loop, you could use slicer [:3] like this
 for i in range(3):
     headline = data_2["articles"][i]["title"]
     print(f"Headline {i+1}: {headline}")
