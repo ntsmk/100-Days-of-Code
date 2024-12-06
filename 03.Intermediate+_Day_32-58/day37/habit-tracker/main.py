@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 USERNAME = "whereismycoffee"
-TOKEN = "gnAgjzIQxgVM"
+TOKEN = ""
 GRAPH_ID = "graph1"
 
 # creating account
@@ -34,8 +34,8 @@ headers = {
     "X-USER-TOKEN": TOKEN,
 }
 
-# response = requests.post(url=graph_endpoint, json=graph_config, headers=headers)
-# print(response.text)
+response = requests.post(url=graph_endpoint, json=graph_config, headers=headers)
+print(response.text)
 
 # posting value to graph
 pixel_endpoint = f"{pixela_endpoint}/{USERNAME}/graphs/{GRAPH_ID}"
@@ -58,5 +58,9 @@ update_pixel_config = {
     "quantity": "15000",
 }
 
-response = requests.put(url=update_pixel_endpoint, json=update_pixel_config, headers=headers)
-print(response.text)
+# response = requests.put(url=update_pixel_endpoint, json=update_pixel_config, headers=headers)
+# print(response.text)
+
+# deleting graph
+# response = requests.delete(url=pixel_endpoint, headers=headers)
+# print(response.text)
