@@ -13,3 +13,13 @@ class DataManager:
         for i in range(len(response.json()["prices"])):
             names.append(response.json()["prices"][i]["city"])
         return names
+
+    def getPrice(self):
+        response = requests.get(url=endpoint)
+        prices = []
+        for i in range(len(response.json()["prices"])):
+            prices.append(response.json()["prices"][i]["lowestPrice"])
+        return prices
+
+    # response = requests.get(url=endpoint)
+    # print(response.json())

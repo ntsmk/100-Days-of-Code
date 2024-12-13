@@ -7,7 +7,10 @@ from datetime import datetime, timedelta
 ORIGIN = "YXY"
 TODAY = datetime.today().strftime("%Y-%m-%d")
 TOMORROW = (datetime.today() + timedelta(1)).strftime("%Y-%m-%d")
+RETURN_DATE = (datetime.today() + timedelta(14)).strftime("%Y-%m-%d")
 CURRENCY = "CAD"
+ADULTS = 1
+MAX = 20
 
 # getting access token
 API_KEY = os.getenv("API_KEY")
@@ -32,13 +35,15 @@ auth_header = {
 city_search_endpoint = "https://test.api.amadeus.com/v1/reference-data/locations/cities"
 d = data_manager.DataManager()
 city_list = d.getNames()
+price_list = d.getPrice()
 IATA_list = []
-for i in range(len(city_list)):
-    keyword = {
-        "keyword": city_list[i]
-    }
-    response = requests.get(url=city_search_endpoint, headers=auth_header, params=keyword)
-    IATA_list.append(response.json()["data"][0]["iataCode"])
+
+# for i in range(len(city_list)):
+#     keyword = {
+#         "keyword": city_list[i]
+#     }
+#     response = requests.get(url=city_search_endpoint, headers=auth_header, params=keyword)
+#     IATA_list.append(response.json()["data"][0]["iataCode"])
 # print(IATA_list)
 
 class FlightSearch:
@@ -47,16 +52,35 @@ class FlightSearch:
 
     amadeus_endpoint = "https://test.api.amadeus.com/v2/shopping/flight-offers"
     result_list = []
-    for iata in range(len(IATA_list)):
-        parameters = {
-            "originLocationCode": ORIGIN,
-            "destinationLocationCode": IATA_list[iata],
-            "departureDate": TOMORROW,
-            "adults": 1,
-            "currencyCode": CURRENCY,
-            "max": 1
-        }
-        response = requests.get(url=amadeus_endpoint, headers=auth_header, params=parameters)
-        result_list.append(json.dumps(response.json()))
+    # for iata in range(len(IATA_list)):
+    #     parameters = {
+    #         "originLocationCode": ORIGIN,
+    #         "destinationLocationCode": IATA_list[iata],
+    #         "departureDate": TOMORROW,
+    #         "returnDate": RETURN_DATE,
+    #         "adults": ADULTS,
+    #         "currencyCode": CURRENCY,
+    #         "max": MAX
+    #     }
+    #     response = requests.get(url=amadeus_endpoint, headers=auth_header, params=parameters)
+    #     print(json.dumps(response.json()))
 
-    print(result_list)
+    parameters = {
+            "originLocationCode": ORIGIN,
+            "destinationLocationCode": "TYO",
+            "departureDate": TOMORROW,
+            "returnDate": RETURN_DATE,
+            "adults": ADULTS,
+            "currencyCode": CURRENCY,
+            "max": MAX
+        }
+    response = requests.get(url=amadeus_endpoint, headers=auth_header, params=parameters)
+    print(response.json()["data"][0]["price"]["total"])
+
+    cheapest_price = price_list[0]
+
+    for i in range(MAX):
+        if float(response.json()["data"][i]["price"]["total"]) < cheapest_price:
+            print("cheapest flight found")
+        else:
+            print("not found")
