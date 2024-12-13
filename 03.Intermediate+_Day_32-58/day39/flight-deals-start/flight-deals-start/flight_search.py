@@ -1,8 +1,13 @@
 import json
-
 import requests
 import os
 import data_manager
+from datetime import datetime, timedelta
+
+ORIGIN = "YXY"
+TODAY = datetime.today().strftime("%Y-%m-%d")
+TOMORROW = (datetime.today() + timedelta(1)).strftime("%Y-%m-%d")
+CURRENCY = "CAD"
 
 # getting access token
 API_KEY = os.getenv("API_KEY")
@@ -34,21 +39,24 @@ for i in range(len(city_list)):
     }
     response = requests.get(url=city_search_endpoint, headers=auth_header, params=keyword)
     IATA_list.append(response.json()["data"][0]["iataCode"])
-print(IATA_list)
+# print(IATA_list)
 
 class FlightSearch:
     #This class is responsible for talking to the Flight Search API.
     # use Amadeus API
 
     amadeus_endpoint = "https://test.api.amadeus.com/v2/shopping/flight-offers"
+    result_list = []
+    for iata in range(len(IATA_list)):
+        parameters = {
+            "originLocationCode": ORIGIN,
+            "destinationLocationCode": IATA_list[iata],
+            "departureDate": TOMORROW,
+            "adults": 1,
+            "currencyCode": CURRENCY,
+            "max": 1
+        }
+        response = requests.get(url=amadeus_endpoint, headers=auth_header, params=parameters)
+        result_list.append(json.dumps(response.json()))
 
-    parameters = {
-        "originLocationCode": "YXY",
-        "destinationLocationCode": "PAR",
-        "departureDate": "2025-05-01",
-        "adults": 1,
-        "currencyCode": "CAD",
-        "max": 10
-    }
-    # response = requests.get(url=amadeus_endpoint, headers=auth_header, params=parameters)
-    # print(json.dumps(response.json()))
+    print(result_list)
