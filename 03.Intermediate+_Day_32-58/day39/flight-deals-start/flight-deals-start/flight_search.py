@@ -7,10 +7,10 @@ from datetime import datetime, timedelta
 ORIGIN = "YXY"
 TODAY = datetime.today().strftime("%Y-%m-%d")
 TOMORROW = (datetime.today() + timedelta(1)).strftime("%Y-%m-%d")
-RETURN_DATE = (datetime.today() + timedelta(14)).strftime("%Y-%m-%d")
+RETURN_DATE = (datetime.today() + timedelta(15)).strftime("%Y-%m-%d")
 CURRENCY = "CAD"
 ADULTS = 1
-MAX = 20
+MAX = 1
 
 # getting access token
 API_KEY = os.getenv("API_KEY")
@@ -38,49 +38,35 @@ city_list = d.getNames()
 price_list = d.getPrice()
 IATA_list = []
 
-# for i in range(len(city_list)):
-#     keyword = {
-#         "keyword": city_list[i]
-#     }
-#     response = requests.get(url=city_search_endpoint, headers=auth_header, params=keyword)
-#     IATA_list.append(response.json()["data"][0]["iataCode"])
-# print(IATA_list)
+for i in range(len(city_list)):
+    keyword = {
+        "keyword": city_list[i]
+    }
+    response = requests.get(url=city_search_endpoint, headers=auth_header, params=keyword)
+    IATA_list.append(response.json()["data"][0]["iataCode"])
 
 class FlightSearch:
     #This class is responsible for talking to the Flight Search API.
-    # use Amadeus API
 
     amadeus_endpoint = "https://test.api.amadeus.com/v2/shopping/flight-offers"
     result_list = []
-    # for iata in range(len(IATA_list)):
-    #     parameters = {
-    #         "originLocationCode": ORIGIN,
-    #         "destinationLocationCode": IATA_list[iata],
-    #         "departureDate": TOMORROW,
-    #         "returnDate": RETURN_DATE,
-    #         "adults": ADULTS,
-    #         "currencyCode": CURRENCY,
-    #         "max": MAX
-    #     }
-    #     response = requests.get(url=amadeus_endpoint, headers=auth_header, params=parameters)
-    #     print(json.dumps(response.json()))
-
-    parameters = {
+    for iata in range(len(IATA_list)):
+        parameters = {
             "originLocationCode": ORIGIN,
-            "destinationLocationCode": "TYO",
+            "destinationLocationCode": IATA_list[iata],
             "departureDate": TOMORROW,
             "returnDate": RETURN_DATE,
             "adults": ADULTS,
             "currencyCode": CURRENCY,
             "max": MAX
         }
-    response = requests.get(url=amadeus_endpoint, headers=auth_header, params=parameters)
-    print(response.json()["data"][0]["price"]["total"])
+        response = requests.get(url=amadeus_endpoint, headers=auth_header, params=parameters)
+        result_list.append(response.json())
 
-    cheapest_price = price_list[0]
+    print(result_list)
 
-    for i in range(MAX):
-        if float(response.json()["data"][i]["price"]["total"]) < cheapest_price:
-            print("cheapest flight found")
-        else:
-            print("not found")
+    # for i in range(len(result_list)):
+    #     if float(result_list["data"][i]["price"]["total"]) < price_list[i]:
+    #         print("cheapest flight found")
+    #     else:
+    #         print("not found")
