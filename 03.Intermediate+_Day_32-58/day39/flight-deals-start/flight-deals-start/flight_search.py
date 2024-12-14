@@ -37,6 +37,7 @@ d = data_manager.DataManager()
 city_list = d.getNames()
 price_list = d.getPrice()
 IATA_list = []
+result_list = []
 
 for i in range(len(city_list)):
     keyword = {
@@ -47,9 +48,9 @@ for i in range(len(city_list)):
 
 class FlightSearch:
     #This class is responsible for talking to the Flight Search API.
+    flight_offer_endpoint = "https://test.api.amadeus.com/v2/shopping/flight-offers"
 
-    amadeus_endpoint = "https://test.api.amadeus.com/v2/shopping/flight-offers"
-    result_list = []
+
     for iata in range(len(IATA_list)):
         parameters = {
             "originLocationCode": ORIGIN,
@@ -60,13 +61,14 @@ class FlightSearch:
             "currencyCode": CURRENCY,
             "max": MAX
         }
-        response = requests.get(url=amadeus_endpoint, headers=auth_header, params=parameters)
+        response = requests.get(url=flight_offer_endpoint, headers=auth_header, params=parameters)
         result_list.append(response.json())
 
-    print(result_list)
+    # print(result_list[3])
+    # print(result_list[3]["data"][0]["price"]["total"])
 
-    # for i in range(len(result_list)):
-    #     if float(result_list["data"][i]["price"]["total"]) < price_list[i]:
-    #         print("cheapest flight found")
-    #     else:
-    #         print("not found")
+    for i in range(len(result_list)):
+        if float(result_list[i]["data"][0]["price"]["total"]) < price_list[i]:
+            print("cheapest flight found")
+        else:
+            print("not found")
