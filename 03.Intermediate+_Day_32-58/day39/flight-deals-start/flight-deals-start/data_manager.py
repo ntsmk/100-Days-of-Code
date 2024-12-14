@@ -3,10 +3,8 @@ import os
 
 endpoint = "https://api.sheety.co/1105c27e55d43a710547b8fe3239700f/copyOfFlightDeals/prices"
 
-
 class DataManager:
     #This class is responsible for talking to the Google Sheet.
-    # use Sheety API
     def getNames(self):
         response = requests.get(url=endpoint)
         names = []

@@ -39,17 +39,16 @@ price_list = d.getPrice()
 IATA_list = []
 result_list = []
 
-for i in range(len(city_list)):
-    keyword = {
-        "keyword": city_list[i]
-    }
-    response = requests.get(url=city_search_endpoint, headers=auth_header, params=keyword)
-    IATA_list.append(response.json()["data"][0]["iataCode"])
-
 class FlightSearch:
     #This class is responsible for talking to the Flight Search API.
     flight_offer_endpoint = "https://test.api.amadeus.com/v2/shopping/flight-offers"
 
+    for i in range(len(city_list)):
+        keyword = {
+            "keyword": city_list[i]
+        }
+        response = requests.get(url=city_search_endpoint, headers=auth_header, params=keyword)
+        IATA_list.append(response.json()["data"][0]["iataCode"])
 
     for iata in range(len(IATA_list)):
         parameters = {
