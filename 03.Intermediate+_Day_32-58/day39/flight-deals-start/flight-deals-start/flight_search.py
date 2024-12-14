@@ -39,6 +39,7 @@ price_list = d.getPrice()
 IATA_list = []
 result_list = []
 
+# todo start working on twilio part
 class FlightSearch:
     #This class is responsible for talking to the Flight Search API.
     flight_offer_endpoint = "https://test.api.amadeus.com/v2/shopping/flight-offers"
