@@ -8,7 +8,7 @@ from_number = os.getenv("from_number")
 to_number = os.getenv("to_number")
 
 # todo edit "body", now it is just "test", import the data from "flight_search"
-# todo figure out if sentence in flight_search.py
+# todo figure out if sentence in flight_search.py -> need to use main.py for circulation issue
 class NotificationManager:
     #This class is responsible for sending notifications with the deal flight details.
 
@@ -26,3 +26,4 @@ class NotificationManager:
         )
 
     sendText("xxx", "100","XYX", "YVR")
+    # todo need to figure it out why this method is not working as it is supposed to be
