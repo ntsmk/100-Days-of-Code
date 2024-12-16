@@ -1,5 +1,6 @@
 import os
 from twilio.rest import Client
+# import flight_search
 
 account_sid = os.getenv("account_sid")
 auth_token = os.getenv("auth_token")
@@ -10,13 +11,18 @@ to_number = os.getenv("to_number")
 # todo figure out if sentence in flight_search.py
 class NotificationManager:
     #This class is responsible for sending notifications with the deal flight details.
-    client = Client(account_sid, auth_token)
-    message = client.messages.create(
-        from_=from_number,
-        body="test",
-        to=to_number
-    )
 
-    def sendText(self):
+    def sendText(self, price, origin, destination):
         # later copy and paste here to give the access in flight_search
-        pass
+        origin = origin
+        destination = destination
+        price = price
+
+        client = Client(account_sid, auth_token)
+        message = client.messages.create(
+            from_=from_number,
+            body=f"Low price alert! Only ${price} to fly from {origin} to {destination}",
+            to=to_number
+        )
+
+    sendText("xxx", "100","XYX", "YVR")

@@ -3,6 +3,7 @@ import requests
 import os
 import data_manager
 from datetime import datetime, timedelta
+import notification_manager
 
 ORIGIN = "YXY"
 TODAY = datetime.today().strftime("%Y-%m-%d")
@@ -39,6 +40,8 @@ price_list = d.getPrice()
 IATA_list = []
 result_list = []
 
+n = notification_manager.NotificationManager()
+
 # todo start working on twilio part
 class FlightSearch:
     #This class is responsible for talking to the Flight Search API.
@@ -70,5 +73,7 @@ class FlightSearch:
     for i in range(len(result_list)):
         if float(result_list[i]["data"][0]["price"]["total"]) < price_list[i]:
             print("cheapest flight found")
+            # n.sendText(result_list[i]["data"][0]["price"]["total"], IATA_list[i])
+
         else:
             print("not found")
