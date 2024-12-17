@@ -14,16 +14,20 @@ to_number = os.getenv("to_number")
 class NotificationManager:
     #This class is responsible for sending notifications with the deal flight details.
 
-    def sendText(self, price, origin, destination):
-        self.price = price
-        self.origin = origin
-        self.destination = destination
+    def sendText(price, origin, destination):
+        price = price
+        origin = origin
+        destination = destination
 
         client = Client(account_sid, auth_token)
         message = client.messages.create(
             from_=from_number,
-            body=f"Low price alert! Only ${self.price} to fly from {self.origin} to {self.destination}",
+            body=f"Low price alert! Only ${price} to fly from {origin} to {destination}",
             to=to_number
         )
 
-    sendText("100", "YXY", "YVR")
+    sendText("2000", "YXY", "TYO")
+    # price is origin
+    # origin is destination
+    # the last parameter is destination
+    # if I delete "self" from the param, it solves it
