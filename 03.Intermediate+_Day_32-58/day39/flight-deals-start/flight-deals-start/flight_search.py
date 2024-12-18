@@ -1,10 +1,12 @@
 import json
 import requests
 import os
-import data_manager
+from dotenv import load_dotenv
 from datetime import datetime, timedelta
-import notification_manager
 
+import data_manager
+
+load_dotenv()
 ORIGIN = "YXY"
 TODAY = datetime.today().strftime("%Y-%m-%d")
 TOMORROW = (datetime.today() + timedelta(1)).strftime("%Y-%m-%d")
@@ -14,8 +16,8 @@ ADULTS = 1
 MAX = 1
 
 # getting access token
-API_KEY = os.getenv("API_KEY")
-API_SECRET = os.getenv("API_SECRET")
+API_KEY = os.getenv("API_KEY1")
+API_SECRET = os.getenv("API_SECRET1")
 oauth_endpoint = "https://test.api.amadeus.com/v1/security/oauth2/token"
 headers = {
     "Content-Type": "application/x-www-form-urlencoded"
@@ -27,45 +29,45 @@ client = {
 }
 # response = requests.post(url=oauth_endpoint, headers=headers, data=client)
 # print(response.text)
-ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
+
+ACCESS_TOKEN = os.getenv("ACCESS_TOKEN1")
 auth_header = {
     "Authorization": f"Bearer {ACCESS_TOKEN}"
 }
 
-# getting city IATA list
-city_search_endpoint = "https://test.api.amadeus.com/v1/reference-data/locations/cities"
-d = data_manager.DataManager()
-city_list = d.getNames()
-price_list = d.getPrice()
-IATA_list = []
-result_list = []
-
-n = notification_manager.NotificationManager()
-
-# todo start working on twilio part
 class FlightSearch:
     #This class is responsible for talking to the Flight Search API.
+
+    # getting city IATA list
+    city_search_endpoint = "https://test.api.amadeus.com/v1/reference-data/locations/cities"
+    d = data_manager.DataManager()
+    city_list = d.getNames()
+    price_list = d.getPrice()
+    IATA_list = []
+    result_list = []
+
+
+    # searching flights
     flight_offer_endpoint = "https://test.api.amadeus.com/v2/shopping/flight-offers"
-
-    for i in range(len(city_list)):
-        keyword = {
-            "keyword": city_list[i]
-        }
-        response = requests.get(url=city_search_endpoint, headers=auth_header, params=keyword)
-        IATA_list.append(response.json()["data"][0]["iataCode"])
-
-    for iata in range(len(IATA_list)):
-        parameters = {
-            "originLocationCode": ORIGIN,
-            "destinationLocationCode": IATA_list[iata],
-            "departureDate": TOMORROW,
-            "returnDate": RETURN_DATE,
-            "adults": ADULTS,
-            "currencyCode": CURRENCY,
-            "max": MAX
-        }
-        response = requests.get(url=flight_offer_endpoint, headers=auth_header, params=parameters)
-        result_list.append(response.json())
+    # for i in range(len(city_list)):
+    #     keyword = {
+    #         "keyword": city_list[i]
+    #     }
+    #     response = requests.get(url=city_search_endpoint, headers=auth_header, params=keyword)
+    #     IATA_list.append(response.json()["data"][0]["iataCode"])
+    #
+    # for iata in range(len(IATA_list)):
+    #     parameters = {
+    #         "originLocationCode": ORIGIN,
+    #         "destinationLocationCode": IATA_list[iata],
+    #         "departureDate": TOMORROW,
+    #         "returnDate": RETURN_DATE,
+    #         "adults": ADULTS,
+    #         "currencyCode": CURRENCY,
+    #         "max": MAX
+    #     }
+    #     response = requests.get(url=flight_offer_endpoint, headers=auth_header, params=parameters)
+    #     result_list.append(response.json())
 
     # print(result_list[3])
     # print(result_list[3]["data"][0]["price"]["total"])
@@ -73,7 +75,6 @@ class FlightSearch:
     for i in range(len(result_list)):
         if float(result_list[i]["data"][0]["price"]["total"]) < price_list[i]:
             print("cheapest flight found")
-            # n.sendText(result_list[i]["data"][0]["price"]["total"], IATA_list[i])
 
         else:
             print("not found")
