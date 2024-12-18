@@ -49,32 +49,33 @@ class FlightSearch:
 
     # searching flights
     flight_offer_endpoint = "https://test.api.amadeus.com/v2/shopping/flight-offers"
-    # for i in range(len(city_list)):
-    #     keyword = {
-    #         "keyword": city_list[i]
-    #     }
-    #     response = requests.get(url=city_search_endpoint, headers=auth_header, params=keyword)
-    #     IATA_list.append(response.json()["data"][0]["iataCode"])
-    #
-    # for iata in range(len(IATA_list)):
-    #     parameters = {
-    #         "originLocationCode": ORIGIN,
-    #         "destinationLocationCode": IATA_list[iata],
-    #         "departureDate": TOMORROW,
-    #         "returnDate": RETURN_DATE,
-    #         "adults": ADULTS,
-    #         "currencyCode": CURRENCY,
-    #         "max": MAX
-    #     }
-    #     response = requests.get(url=flight_offer_endpoint, headers=auth_header, params=parameters)
-    #     result_list.append(response.json())
+    for i in range(len(city_list)):
+        keyword = {
+            "keyword": city_list[i]
+        }
+        response = requests.get(url=city_search_endpoint, headers=auth_header, params=keyword)
+        IATA_list.append(response.json()["data"][0]["iataCode"])
 
+    for iata in range(len(IATA_list)):
+        parameters = {
+            "originLocationCode": ORIGIN,
+            "destinationLocationCode": IATA_list[iata],
+            "departureDate": TOMORROW,
+            "returnDate": RETURN_DATE,
+            "adults": ADULTS,
+            "currencyCode": CURRENCY,
+            "max": MAX
+        }
+        response = requests.get(url=flight_offer_endpoint, headers=auth_header, params=parameters)
+        result_list.append(response.json())
+
+    print(result_list)
     # print(result_list[3])
     # print(result_list[3]["data"][0]["price"]["total"])
 
-    for i in range(len(result_list)):
-        if float(result_list[i]["data"][0]["price"]["total"]) < price_list[i]:
-            print("cheapest flight found")
-
-        else:
-            print("not found")
+    # for i in range(len(result_list)):
+    #     if float(result_list[i]["data"][0]["price"]["total"]) < price_list[i]:
+    #         print("cheapest flight found")
+    #
+    #     else:
+    #         print("not found")
