@@ -14,15 +14,6 @@ class DataManager:
         response = requests.get(url=endpoint, auth=auth)
         return response.json()
 
-    param = {
-        'price': {
-            'iataCode': "TESTING",
-        }
-    }
-
-    # response = requests.put(url=put_endpoint, json=param, auth=auth)
-    # print(response.text)
-
     def getNames(self):
         response = requests.get(url=endpoint, auth=auth)
         names = []
@@ -36,3 +27,11 @@ class DataManager:
         for i in range(len(response.json()["prices"])):
             prices.append(response.json()["prices"][i]["lowestPrice"])
         return prices
+
+    # param = {
+    #     'price': {
+    #         'iataCode': "TESTING",
+    #     }
+    # }
+    # response = requests.put(url=put_endpoint, json=param, auth=auth)
+    # print(response.text)
