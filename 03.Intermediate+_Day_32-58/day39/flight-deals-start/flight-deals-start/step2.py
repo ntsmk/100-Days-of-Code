@@ -28,7 +28,6 @@ class DataManager:
             prices.append(response.json()["prices"][i]["lowestPrice"])
         return prices
 
-
     def updateIATA(self, IATA_list1):
         IATA_list = IATA_list1
 

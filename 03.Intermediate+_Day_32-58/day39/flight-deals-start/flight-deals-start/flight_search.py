@@ -15,28 +15,27 @@ CURRENCY = "CAD"
 ADULTS = 1
 MAX = 1
 
-# getting access token
-API_KEY = os.getenv("API_KEY1")
-API_SECRET = os.getenv("API_SECRET1")
-oauth_endpoint = "https://test.api.amadeus.com/v1/security/oauth2/token"
-headers = {
-    "Content-Type": "application/x-www-form-urlencoded"
-}
-client = {
-    "grant_type": "client_credentials",
-    "client_id": API_KEY,
-    "client_secret": API_SECRET,
-}
-# response = requests.post(url=oauth_endpoint, headers=headers, data=client)
-# print(response.text)
-
-ACCESS_TOKEN = os.getenv("ACCESS_TOKEN1")
-auth_header = {
-    "Authorization": f"Bearer {ACCESS_TOKEN}"
-}
-
 class FlightSearch:
     #This class is responsible for talking to the Flight Search API.
+    def __init__(self):
+        # getting access token
+        API_KEY = os.getenv("API_KEY1")
+        API_SECRET = os.getenv("API_SECRET1")
+        oauth_endpoint = "https://test.api.amadeus.com/v1/security/oauth2/token"
+        headers = {
+            "Content-Type": "application/x-www-form-urlencoded"
+        }
+        client = {
+            "grant_type": "client_credentials",
+            "client_id": API_KEY,
+            "client_secret": API_SECRET,
+        }
+        response_token = requests.post(url=oauth_endpoint, headers=headers, data=client)
+
+        ACCESS_TOKEN = response_token.json()["access_token"]
+        self.auth_header = {
+            "Authorization": f"Bearer {ACCESS_TOKEN}"
+        }
 
     # getting city IATA list
     def getIATA(self, city_list):
@@ -48,7 +47,7 @@ class FlightSearch:
             keyword = {
                 "keyword": city_list[i]
             }
-            response = requests.get(url=city_search_endpoint, headers=auth_header, params=keyword)
+            response = requests.get(url=city_search_endpoint, headers=self.auth_header, params=keyword)
             IATA_list.append(response.json()["data"][0]["iataCode"])
         return IATA_list
 

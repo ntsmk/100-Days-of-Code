@@ -4,15 +4,16 @@ from step2 import DataManager
 from flight_search import FlightSearch
 
 dm = DataManager()
+fs = FlightSearch()
+
 sheet_data = dm.getEverything()
 print(sheet_data)
 
-# city_name = dm.getNames()
-# price = dm.getPrice()
+city_name = dm.getNames()
+price = dm.getPrice()
 
-fs = FlightSearch()
-# IATA_list = fs.getIATA(city_name)
-# print(IATA_list)
+IATA_list = fs.getIATA(city_name)
+print(IATA_list)
 
 # dm.updateIATA(IATA_list)
 
