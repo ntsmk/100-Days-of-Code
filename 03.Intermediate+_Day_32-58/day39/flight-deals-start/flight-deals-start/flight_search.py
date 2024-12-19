@@ -19,22 +19,22 @@ class FlightSearch:
     #This class is responsible for talking to the Flight Search API.
     def __init__(self):
         # getting access token
-        API_KEY = os.getenv("API_KEY1")
-        API_SECRET = os.getenv("API_SECRET1")
+        _api_key = os.getenv("API_KEY1")
+        _api_secret = os.getenv("API_SECRET1")
         oauth_endpoint = "https://test.api.amadeus.com/v1/security/oauth2/token"
         headers = {
             "Content-Type": "application/x-www-form-urlencoded"
         }
         client = {
             "grant_type": "client_credentials",
-            "client_id": API_KEY,
-            "client_secret": API_SECRET,
+            "client_id": _api_key,
+            "client_secret": _api_secret,
         }
         response_token = requests.post(url=oauth_endpoint, headers=headers, data=client)
 
-        ACCESS_TOKEN = response_token.json()["access_token"]
+        _token = response_token.json()["access_token"]
         self.auth_header = {
-            "Authorization": f"Bearer {ACCESS_TOKEN}"
+            "Authorization": f"Bearer {_token}"
         }
 
     # getting city IATA list
