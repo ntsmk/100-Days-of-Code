@@ -14,3 +14,5 @@ fs = FlightSearch()
 IATA_list = fs.getIATA(city_name)
 print(IATA_list)
 
+dm.updateIATA(IATA_list)
+

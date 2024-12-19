@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 
 endpoint = "https://api.sheety.co/1105c27e55d43a710547b8fe3239700f/copyOfFlightDeals2/prices"
-put_endpoint = "https://api.sheety.co/1105c27e55d43a710547b8fe3239700f/copyOfFlightDeals2/prices/2"
+
 load_dotenv()
 auth = HTTPBasicAuth(os.getenv("UID1"), os.getenv("PASS1"))
 
@@ -28,10 +28,16 @@ class DataManager:
             prices.append(response.json()["prices"][i]["lowestPrice"])
         return prices
 
-    # param = {
-    #     'price': {
-    #         'iataCode': "TESTING",
-    #     }
-    # }
-    # response = requests.put(url=put_endpoint, json=param, auth=auth)
-    # print(response.text)
+
+    def updateIATA(self, IATA_list1):
+        IATA_list = IATA_list1
+
+        for i in range(len(IATA_list)):
+            put_endpoint = f"{endpoint}/{i+2}"
+            param = {
+                'price': {
+                    'iataCode': IATA_list[i],
+                }
+            }
+            response = requests.put(url=put_endpoint, json=param, auth=auth)
+        print(response.text)
