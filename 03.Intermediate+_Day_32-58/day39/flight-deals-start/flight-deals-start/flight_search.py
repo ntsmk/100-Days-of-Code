@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
 
-import data_manager
+import step2
 
 load_dotenv()
 ORIGIN = "YXY"
@@ -40,7 +40,7 @@ class FlightSearch:
 
     # getting city IATA list
     city_search_endpoint = "https://test.api.amadeus.com/v1/reference-data/locations/cities"
-    d = data_manager.DataManager()
+    d = step2.DataManager()
     city_list = d.getNames()
     price_list = d.getPrice()
     IATA_list = []

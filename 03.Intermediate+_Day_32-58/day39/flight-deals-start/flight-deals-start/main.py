@@ -6,4 +6,9 @@ dm = DataManager()
 sheet_data = dm.getEverything()
 print(sheet_data)
 
+# city_name = dm.getNames()
+# price = dm.getPrice()
+# print(city_name)
+# print(price)
+
 

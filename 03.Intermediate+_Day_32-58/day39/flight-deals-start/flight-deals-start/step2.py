@@ -10,7 +10,6 @@ load_dotenv()
 auth = HTTPBasicAuth(os.getenv("UID1"), os.getenv("PASS1"))
 
 class DataManager:
-
     def getEverything(self):
         response = requests.get(url=endpoint, auth=auth)
         return response.json()
@@ -23,3 +22,17 @@ class DataManager:
 
     # response = requests.put(url=put_endpoint, json=param, auth=auth)
     # print(response.text)
+
+    def getNames(self):
+        response = requests.get(url=endpoint, auth=auth)
+        names = []
+        for i in range(len(response.json()["prices"])):
+            names.append(response.json()["prices"][i]["city"])
+        return names
+
+    def getPrice(self):
+        response = requests.get(url=endpoint, auth=auth)
+        prices = []
+        for i in range(len(response.json()["prices"])):
+            prices.append(response.json()["prices"][i]["lowestPrice"])
+        return prices
