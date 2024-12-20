@@ -75,6 +75,3 @@ class FlightSearch:
             # print(result_list)
         return result_list
 
-
-        # print(json.dumps(response.json()))
-        # print(response.json()["data"][0]["price"]["total"])
