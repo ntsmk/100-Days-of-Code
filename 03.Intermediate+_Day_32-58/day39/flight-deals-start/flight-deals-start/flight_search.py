@@ -52,17 +52,26 @@ class FlightSearch:
 
 
     # searching flights
-    def flightSearch(self):
+    def flightSearch(self, iata_list1):
         flight_offer_endpoint = "https://test.api.amadeus.com/v2/shopping/flight-offers"
-        parameters = {
-                "originLocationCode": ORIGIN,
-                "destinationLocationCode": "PAR",
-                "departureDate": TOMORROW,
-                "returnDate": RETURN_DATE,
-                "adults": ADULTS,
-                "currencyCode": CURRENCY,
-                "nonStop": "true",
-                "max": MAX
-            }
-        response = requests.get(url=flight_offer_endpoint, headers=self.auth_header, params=parameters)
-        print(json.dumps(response.json()))
+        iata_list = iata_list1
+        result_list = []
+        for i in range(len(iata_list)):
+            parameters = {
+                    "originLocationCode": ORIGIN,
+                    "destinationLocationCode": iata_list[i],
+                    "departureDate": TOMORROW,
+                    "returnDate": RETURN_DATE,
+                    "adults": ADULTS,
+                    "currencyCode": CURRENCY,
+                    # "nonStop": "true",
+                    "max": MAX
+                }
+            response = requests.get(url=flight_offer_endpoint, headers=self.auth_header, params=parameters)
+            result_list.append(response.json()["data"][0]["price"]["total"])
+            print(result_list)
+        return result_list
+
+
+        # print(json.dumps(response.json()))
+        # print(response.json()["data"][0]["price"]["total"])
