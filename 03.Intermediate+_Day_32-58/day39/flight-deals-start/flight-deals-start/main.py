@@ -3,10 +3,12 @@
 from step2 import DataManager
 from flight_search import FlightSearch
 from flight_data import FlightData
+from notification_manager import NotificationManager
 
 dm = DataManager()
 fs = FlightSearch()
 fd = FlightData()
+nm = NotificationManager()
 
 # sheet_data = dm.getEverything()
 # print(sheet_data)
@@ -20,5 +22,5 @@ IATA_list = fs.getIATA(city_name)
 results = fs.flightSearch(IATA_list)
 # print(results)
 
-fd.find_cheapest_flight(city_name, results)
-
+# fd.find_cheapest_flight(city_name, results)
+nm.sendText()
