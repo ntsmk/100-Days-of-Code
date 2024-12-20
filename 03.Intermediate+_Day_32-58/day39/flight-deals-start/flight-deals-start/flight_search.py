@@ -4,8 +4,6 @@ import os
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
 
-import step2
-
 load_dotenv()
 ORIGIN = "YXY"
 TODAY = datetime.today().strftime("%Y-%m-%d")
@@ -55,21 +53,14 @@ class FlightSearch:
     # searching flights
     def flightSearch(self):
         flight_offer_endpoint = "https://test.api.amadeus.com/v2/shopping/flight-offers"
-
-    # for iata in range(len(IATA_list)):
-    #     parameters = {
-    #         "originLocationCode": ORIGIN,
-    #         "destinationLocationCode": IATA_list[iata],
-    #         "departureDate": TOMORROW,
-    #         "returnDate": RETURN_DATE,
-    #         "adults": ADULTS,
-    #         "currencyCode": CURRENCY,
-    #         "max": MAX
-    #     }
-    #     result_list = []
-    #     response = requests.get(url=flight_offer_endpoint, headers=auth_header, params=parameters)
-    #     result_list.append(response.json())
-    #
-    # print(result_list)
-    # print(result_list[3])
-    # print(result_list[3]["data"][0]["price"]["total"])
+        parameters = {
+                "originLocationCode": ORIGIN,
+                "destinationLocationCode": "PAR",
+                "departureDate": TOMORROW,
+                "returnDate": RETURN_DATE,
+                "adults": ADULTS,
+                "currencyCode": CURRENCY,
+                "max": MAX
+            }
+        response = requests.get(url=flight_offer_endpoint, headers=self.auth_header, params=parameters)
+        print(json.dumps(response.json()))
