@@ -1,7 +1,7 @@
 import json
 import requests
-import os
 from dotenv import load_dotenv
+import os
 from datetime import datetime, timedelta
 
 load_dotenv()
@@ -60,6 +60,7 @@ class FlightSearch:
                 "returnDate": RETURN_DATE,
                 "adults": ADULTS,
                 "currencyCode": CURRENCY,
+                "nonStop": "true",
                 "max": MAX
             }
         response = requests.get(url=flight_offer_endpoint, headers=self.auth_header, params=parameters)
