@@ -2,9 +2,11 @@
 
 from step2 import DataManager
 from flight_search import FlightSearch
+from flight_data import FlightData
 
 dm = DataManager()
 fs = FlightSearch()
+fd = FlightData()
 
 # sheet_data = dm.getEverything()
 # print(sheet_data)
@@ -19,4 +21,6 @@ fs = FlightSearch()
 
 # todo call the flight search method from flight search
 fs.flightSearch()
+
+# fd.find_cheapest_flight()
 

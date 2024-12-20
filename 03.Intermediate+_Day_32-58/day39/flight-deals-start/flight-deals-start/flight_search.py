@@ -8,6 +8,7 @@ load_dotenv()
 ORIGIN = "YXY"
 TODAY = datetime.today().strftime("%Y-%m-%d")
 TOMORROW = (datetime.today() + timedelta(1)).strftime("%Y-%m-%d")
+SIX_MONTH = (datetime.today() + timedelta(180)).strftime("%Y-%m-%d")
 RETURN_DATE = (datetime.today() + timedelta(15)).strftime("%Y-%m-%d")
 CURRENCY = "CAD"
 ADULTS = 1
