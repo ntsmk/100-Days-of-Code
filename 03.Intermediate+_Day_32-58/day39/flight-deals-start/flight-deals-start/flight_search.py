@@ -68,8 +68,11 @@ class FlightSearch:
                     "max": MAX
                 }
             response = requests.get(url=flight_offer_endpoint, headers=self.auth_header, params=parameters)
-            result_list.append(response.json()["data"][0]["price"]["total"])
-            print(result_list)
+            try:
+                result_list.append(response.json()["data"][0]["price"]["total"])
+            except IndexError:
+                result_list.append("N/A")
+            # print(result_list)
         return result_list
 
 
