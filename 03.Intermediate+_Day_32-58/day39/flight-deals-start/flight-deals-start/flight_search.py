@@ -53,7 +53,8 @@ class FlightSearch:
 
 
     # searching flights
-    flight_offer_endpoint = "https://test.api.amadeus.com/v2/shopping/flight-offers"
+    def flightSearch(self):
+        flight_offer_endpoint = "https://test.api.amadeus.com/v2/shopping/flight-offers"
 
     # for iata in range(len(IATA_list)):
     #     parameters = {
