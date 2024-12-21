@@ -20,6 +20,7 @@ IATA_list = fs.getIATA(city_name)
 
 results = fs.flightSearch(IATA_list)
 # print(results)
-# fd.find_cheapest_flight(city_name, results)
-
-# nm.sendText()
+fd.find_cheapest_flight(city_name, results)
+sheet_price = dm.getPrice()
+# print(sheet_price)
+nm.sendText(city_name, sheet_price, results)
