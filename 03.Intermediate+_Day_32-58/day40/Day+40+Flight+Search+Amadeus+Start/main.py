@@ -6,6 +6,7 @@ from flight_data import find_cheapest_flight
 from notification_manager import NotificationManager
 
 # ==================== Set up the Flight Search ====================
+# todo make sure this works
 
 data_manager = DataManager()
 sheet_data = data_manager.get_destination_data()
