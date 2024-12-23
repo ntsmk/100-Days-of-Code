@@ -5,22 +5,21 @@ from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
-auth = HTTPBasicAuth(os.getenv("SHEETY_USRERNAME"), os.getenv("SHEETY_PASSWORD"))
-
-SHEETY_PRICES_ENDPOINT = os.getenv("PRICES_ENDPOINT")
-SHEETY_USERS_ENDPOINT = os.getenv("USERS_ENDPOINT")
 
 class DataManager:
 
     def __init__(self):
         self._user = os.environ["SHEETY_USRERNAME"]
         self._password = os.environ["SHEETY_PASSWORD"]
+        self.prices_endpoint = os.getenv("PRICES_ENDPOINT")
+        self.users_endpoint = os.getenv("USERS_ENDPOINT")
+        self.auth = HTTPBasicAuth(os.getenv("SHEETY_USRERNAME"), os.getenv("SHEETY_PASSWORD"))
         self._authorization = HTTPBasicAuth(self._user, self._password)
         self.destination_data = {}
 
     def get_destination_data(self):
         # Use the Sheety API to GET all the data in that sheet and print it out.
-        response = requests.get(url=SHEETY_PRICES_ENDPOINT, auth=auth)
+        response = requests.get(url=self.prices_endpoint, auth=self.auth)
         data = response.json()
         self.destination_data = data["prices"]
         # Try importing pretty print and printing the data out again using pprint() to see it formatted.
@@ -37,14 +36,14 @@ class DataManager:
                 }
             }
             response = requests.put(
-                url=f"{SHEETY_PRICES_ENDPOINT}/{city['id']}",
+                url=f"{self.prices_endpoint}/{city['id']}",
                 json=new_data,
-                auth=auth
+                auth=self.auth
             )
             print(response.text)
 
     def get_customer_emails(self):
-        response = requests.get(url=SHEETY_USERS_ENDPOINT, auth=auth)
+        response = requests.get(url=self.users_endpoint, auth=self.auth)
         data = response.json()['users']
         email_address = [email['whatIsYourEmailAddress'] for email in data]
         return email_address
