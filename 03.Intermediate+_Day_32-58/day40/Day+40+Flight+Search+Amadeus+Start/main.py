@@ -51,8 +51,7 @@ for destination in sheet_data:
 
     if cheapest_flight.price != "N/A" and cheapest_flight.price < destination["lowestPrice"]:
         print(f"Lower price flight found to {destination['city']}!")
-        notification_manager.send_sms(
-            message_body=f"Low price alert! Only ${cheapest_flight.price} to fly "
-                         f"from Whitehorse to {destination['city']}, "
-                         f"on {cheapest_flight.out_date} until {cheapest_flight.return_date}."
-        )
+        message_body = f"Low price alert! Only ${cheapest_flight.price} to fly from Whitehorse to {destination['city']}, on {cheapest_flight.out_date} until {cheapest_flight.return_date}."
+        # notification_manager.send_sms(message_body)
+        notification_manager.send_emails(message_body, email_list)
+
