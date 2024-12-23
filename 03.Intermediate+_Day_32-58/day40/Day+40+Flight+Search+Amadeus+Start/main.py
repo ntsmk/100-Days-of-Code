@@ -15,6 +15,9 @@ notification_manager = NotificationManager()
 # Set your origin airport
 ORIGIN_CITY_IATA = "YXY"
 
+# ==================== Getting customer email address in Google Sheet ====================
+email_list = data_manager.get_customer_emails()
+
 # ==================== Update the Airport Codes in Google Sheet ====================
 
 for row in sheet_data:
