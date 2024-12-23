@@ -33,7 +33,7 @@ class NotificationManager:
         message = self.client.messages.create(
             from_=os.environ["TWILIO_VIRTUAL_NUMBER"],
             body=message_body,
-            to=os.environ["TWILIO_VIRTUAL_NUMBER"]
+            to=os.environ["TWILIO_VERIFIED_NUMBER"]
         )
         # Prints if successfully sent.
         print(message.sid)
