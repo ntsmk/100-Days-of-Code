@@ -51,7 +51,7 @@ class NotificationManager:
         )
         print(message.sid)
 
-    # todo add message_body after finding pass
+    # todo add message_body after finding pass, found pass but it is not working.
     def send_emails(self):
         with smtplib.SMTP(os.environ["SMTP"]) as connection:
             connection.starttls()

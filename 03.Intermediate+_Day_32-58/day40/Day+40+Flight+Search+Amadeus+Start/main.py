@@ -56,4 +56,3 @@ for destination in sheet_data:
                          f"from Whitehorse to {destination['city']}, "
                          f"on {cheapest_flight.out_date} until {cheapest_flight.return_date}."
         )
-
