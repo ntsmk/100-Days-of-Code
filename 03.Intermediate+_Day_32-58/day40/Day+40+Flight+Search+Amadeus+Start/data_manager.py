@@ -5,9 +5,9 @@ from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
+auth = HTTPBasicAuth(os.getenv("SHEETY_USRERNAME"), os.getenv("SHEETY_PASSWORD"))
 
 SHEETY_PRICES_ENDPOINT = "https://api.sheety.co/1105c27e55d43a710547b8fe3239700f/copyOfFlightDeals2/prices"
-
 
 class DataManager:
 
@@ -19,7 +19,7 @@ class DataManager:
 
     def get_destination_data(self):
         # Use the Sheety API to GET all the data in that sheet and print it out.
-        response = requests.get(url=SHEETY_PRICES_ENDPOINT)
+        response = requests.get(url=SHEETY_PRICES_ENDPOINT, auth=auth)
         data = response.json()
         self.destination_data = data["prices"]
         # Try importing pretty print and printing the data out again using pprint() to see it formatted.
