@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+# import lxml
 
 # content = open("website.html", "r")
 # print(content.read())
@@ -6,4 +7,5 @@ from bs4 import BeautifulSoup
 with open("website.html") as file:
     content = file.read()
 
-print(content)
+soup = BeautifulSoup(content, "html.parser")
+print(soup.title)
