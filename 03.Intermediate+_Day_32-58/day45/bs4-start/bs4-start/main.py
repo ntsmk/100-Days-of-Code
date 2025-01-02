@@ -7,14 +7,19 @@ response = requests.get("https://news.ycombinator.com/news")
 yc_web_page = response.text
 soup = BeautifulSoup(yc_web_page,"html.parser")
 
+# single
 title = soup.find(class_="titleline")
 link = title.select_one("a").get("href")
 subtitle = soup.find(class_="subline")
-article_upvotes = subtitle.find(class_="score").getText()
+upvote = subtitle.find(class_="score").getText()
+
+# all
+titles = soup.find_all(class_="titleline")
+subtitles = soup.find_all(class_="subline")
 
 article_texts = []
 article_links = []
-titles = soup.find_all(class_="titleline")
+
 for title in titles:
     article_texts.append(title.getText())
     link = title.select_one("a").get("href")
@@ -22,6 +27,14 @@ for title in titles:
 # print(article_texts) -> it works
 # print(article_links) -> it works but sometimes it contains 'item?id=42575535'
 
+# not using list comprehension
+# article_upvotes = []
+# for subtitle_ in subtitles:
+#     upvote = subtitle_.find(class_="score").getText()
+#     article_upvotes.append(upvote)
+
+article_upvotes = [subtitle.find(class_="score").getText() for subtitle in subtitles]
+print(article_upvotes)
 
 
 # # import lxml
