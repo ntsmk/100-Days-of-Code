@@ -8,12 +8,18 @@ yc_web_page = response.text
 soup = BeautifulSoup(yc_web_page,"html.parser")
 # print(soup.title)
 # todo get class=titleline
-titleline = soup.find_all(class_="titleline")
-# print(titleline)
-for title in titleline:
-    print(title.getText())
+titlelines = soup.find_all(class_="titleline")
+# print(titlelines)
+# for title in titlelines:
+#     print(title.getText())
 
+title = soup.find(class_="titleline")
+subtitle = soup.find(class_="subline")
+text = title.getText()
+link = title.select_one("a").get("href")
+article_upvotes = subtitle.find(class_="score").getText()
 
+print(article_upvotes)
 
 
 
