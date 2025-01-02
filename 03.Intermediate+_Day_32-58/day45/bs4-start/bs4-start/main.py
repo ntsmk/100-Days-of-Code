@@ -6,24 +6,21 @@ response = requests.get("https://news.ycombinator.com/news")
 
 yc_web_page = response.text
 soup = BeautifulSoup(yc_web_page,"html.parser")
-# print(soup.title)
-# todo get class=titleline
-titlelines = soup.find_all(class_="titleline")
-# print(titlelines)
-# for title in titlelines:
-#     print(title.getText())
 
 title = soup.find(class_="titleline")
-subtitle = soup.find(class_="subline")
-text = title.getText()
 link = title.select_one("a").get("href")
+subtitle = soup.find(class_="subline")
 article_upvotes = subtitle.find(class_="score").getText()
 
-print(article_upvotes)
-
-
-
-
+article_texts = []
+article_links = []
+titles = soup.find_all(class_="titleline")
+for title in titles:
+    article_texts.append(title.getText())
+    link = title.select_one("a").get("href")
+    article_links.append(link)
+# print(article_texts) -> it works
+# print(article_links) -> it works but sometimes it contains 'item?id=42575535'
 
 
 
