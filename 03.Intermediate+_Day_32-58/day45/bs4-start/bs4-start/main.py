@@ -33,9 +33,17 @@ for title in titles:
 #     upvote = subtitle_.find(class_="score").getText()
 #     article_upvotes.append(upvote)
 
-article_upvotes = [subtitle.find(class_="score").getText() for subtitle in subtitles]
-print(article_upvotes)
+article_upvotes = [int(subtitle.find(class_="score").getText().split()[0]) for subtitle in subtitles]
+# print(int(article_upvotes[0].split()[0]))
 
+# print(article_texts)
+# print(article_links)
+# print(article_upvotes)
+
+highest_index = article_upvotes.index(max(article_upvotes))
+print(f"the highest upvote is {max(article_upvotes)} points and index number is {highest_index}")
+print(article_texts[highest_index])
+print(article_links[highest_index])
 
 # # import lxml
 #
