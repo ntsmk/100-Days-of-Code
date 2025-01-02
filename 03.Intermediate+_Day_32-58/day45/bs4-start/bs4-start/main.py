@@ -2,11 +2,16 @@ from bs4 import BeautifulSoup
 import requests
 
 response = requests.get("https://news.ycombinator.com/news")
-# requests.get("https://appbrewery.github.io/news.ycombinator.com/")
+# response = requests.get("https://appbrewery.github.io/news.ycombinator.com/")
 
-print(response.text)
-
-
+yc_web_page = response.text
+soup = BeautifulSoup(yc_web_page,"html.parser")
+# print(soup.title)
+# todo get class=titleline
+titleline = soup.find_all(class_="titleline")
+# print(titleline)
+for title in titleline:
+    print(title.getText())
 
 
 
