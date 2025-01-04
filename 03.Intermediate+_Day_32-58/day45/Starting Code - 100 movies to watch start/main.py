@@ -11,17 +11,16 @@ soup = BeautifulSoup(movie_page, "html.parser")
 
 # titles = soup.find_all(class_="title")
 titles = soup.find_all("h3")
-movie_list = []
-for title in titles:
-    movie_list.append(title.getText())
-
-# todo figure out how to sort properly -> found a solution
-# https://note.nkmk.me/en/python-sort-num-str/
+movie_list = [title.getText() for title in titles]
+# for title in titles:
+#     movie_list.append(title.getText())
+# print(movie_list)
 
 # movie_list.sort()
 # print(sorted(movie_list))
 # print(sorted(movie_list, key=lambda s: int(re.search(r'\d+', s).group())))
-movie_list1 = sorted(movie_list, key=lambda s: int(re.search(r'\d+', s).group()))
+# movie_list1 = sorted(movie_list, key=lambda s: int(re.search(r'\d+', s).group()))
+movie_list1 = movie_list[::-1]
 # print(movie_list1)
 
 with open('movie.txt', 'w', encoding="utf-8") as f:
