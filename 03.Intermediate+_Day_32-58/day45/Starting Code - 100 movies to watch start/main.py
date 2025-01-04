@@ -14,12 +14,10 @@ movie_list = []
 for title in titles:
     movie_list.append(title.getText())
 
+# todo figure out how to sort properly
 movie_list.sort()
 print(movie_list)
 
-with open('movie.txt', 'w') as f:
+with open('movie.txt', 'w', encoding="utf-8") as f:
     for i in range(len(movie_list)):
         f.writelines(f"{movie_list[i]}\n")
-
-
-# todo Generate a text file called movies.txt that lists the movie titles in ascending order (starting from 1)
