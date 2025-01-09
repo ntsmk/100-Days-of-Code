@@ -16,7 +16,7 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=client_id, client_secre
 
 date = input("Which year do you want to travel to? Type the date in this format YYYY-MM-DD: ")
 URL = f"https://www.billboard.com/charts/hot-100/{date}/"
-max_songs = 30
+max_songs = 20
 
 # 1. pulling the top 100 songs from the Billboard (Scraping part)
 header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0"}
@@ -26,7 +26,7 @@ soup = BeautifulSoup(billboard_page, "html.parser")
 songs_name = soup.select(selector="li h3", class_="c-title a-no-trucate")
 song_list = [song.getText().strip() for song in songs_name]
 song_list_100 = song_list[0:max_songs]
-print(song_list_100)
+print("searching for the songs...")
 
 # 2. get URI for the song
 uri_list = []
@@ -34,7 +34,7 @@ for i in range(len(song_list_100)):
     results = sp.search(song_list_100[i], type="track", limit=1)
     song_uri = results['tracks']['items'][0]['uri']
     uri_list.append(song_uri)
-print(uri_list)
+print("Songs found successfully!")
 
 # 3. create the new playlist
 playlist_creation = sp.user_playlist_create(user=user_id,
@@ -45,5 +45,4 @@ playlist_id = playlist_creation["id"]
 
 # # 4. add the songs to the playlist
 sp.user_playlist_add_tracks(user_id, playlist_id, uri_list, position=None)
-
 print("Playlist created successfully!")
