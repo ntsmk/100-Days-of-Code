@@ -12,12 +12,14 @@ client_secret = os.getenv("CLIENT_SECRET")
 sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(client_id=client_id,
                                                            client_secret=client_secret))
 
-# pulling the top 20 songs of Avicii
-results = sp.search(q='Avicii', limit=20)
-song_list = [song["name"] for song in results["tracks"]["items"]]
-print(song_list)
+# pulling the top 20 songs of the artist
+# results = sp.search(q='weezer', limit=20)
+# song_list = [song["name"] for song in results["tracks"]["items"]]
+# print(song_list)
 
-
+# todo create a list of Spotify song URIs for the list of song names you found on Billboard
+results = sp.xxx # needs to figure it out
+print(results)
 
 
 # date = input("Which year do you want to travel to? Type the date in this format YYYY-MM-DD: ")
