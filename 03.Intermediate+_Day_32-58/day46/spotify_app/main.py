@@ -16,7 +16,7 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=client_id, client_secre
 
 date = input("Which year do you want to travel to? Type the date in this format YYYY-MM-DD: ")
 URL = f"https://www.billboard.com/charts/hot-100/{date}/"
-max_songs = 20
+max_songs = 30
 
 # 1. pulling the top 100 songs from the Billboard (Scraping part)
 header = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0"}
