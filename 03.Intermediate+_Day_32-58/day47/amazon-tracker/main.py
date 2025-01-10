@@ -1,5 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
+import os
+from dotenv import load_dotenv
+import smtplib
 
 
 URL = "https://appbrewery.github.io/instant_pot/"
@@ -7,14 +10,33 @@ URL = "https://appbrewery.github.io/instant_pot/"
 response = requests.get(URL)
 amazon_page = response.text
 soup = BeautifulSoup(amazon_page, "html.parser")
-price = soup.find(class_="a-offscreen").getText()
-# whole_price = soup.find(class_="a-price-whole").getText()
-# decimal = soup.find(class_="a-price-fraction").getText()
-# print(f"{whole_price}{decimal}")
-print(price.split("$")[1])
+
+# step 1
+title = soup.find(class_="a-size-large product-title-word-break").getText().split("\n")[0]
+price = soup.find(class_="a-offscreen").getText().split("$")[1]
+print(title)
+print(price)
 
 # tried in the real one but it didn't work
 # price = soup.select(selector="tr", class_="a-offscreen")
 # print(price)
 
-# step 1 is done
+# step 2
+load_dotenv()
+smtp_address = os.getenv("SMTP_ADDRESS")
+email_address = os.getenv("EMAIL_ADDRESS")
+password = os.getenv("EMAIL_PASSWORD")
+max_price = 100
+
+def sendEmail():
+    with smtplib.SMTP(smtp_address) as connection:
+        connection.starttls()
+        connection.login(user=email_address, password=password)
+        connection.sendmail(from_addr=email_address,
+                            to_addrs=email_address,
+                            msg=f"Subject:Amazon Price Alert\n\n{title.encode('utf-8')} is now "f"${price}, "
+                                f"go check it out!\n{URL}")
+
+if float(price) < max_price:
+    sendEmail()
+    print("Email sent")
