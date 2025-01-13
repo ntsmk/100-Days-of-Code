@@ -21,8 +21,16 @@ driver.get("https://www.python.org/")
 # bug_link = driver.find_element(By.XPATH, value="/html/body/div/footer/div[2]/div/ul/li[3]/a")
 # print(bug_link.text)
 # todo create a dictionary contains "Upcoming Events"
-events_time = driver.find_elements(By.CSS_SELECTOR, value="medium-widget event-widget last")
-print(events_time)
+events_time = driver.find_elements(By.CSS_SELECTOR, value=".event-widget li time")
+times = [event.text for event in events_time]
+events_name = driver.find_elements(By.CSS_SELECTOR, value=".event-widget li a")
+names = [event.text for event in events_name]
+
+# event_dict = {}
+# for i in range(len(times)):
+#     event_dict.update({i:{"time": times[i], "name": names[i]}})
+event_dict = {i: {"time": times[i], "name": names[i]} for i in range(len(times))}
+print(event_dict)
 
 # driver.close() -> just one tab
 # driver.quit() -> all tabs
