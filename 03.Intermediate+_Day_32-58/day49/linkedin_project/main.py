@@ -49,3 +49,5 @@ follow.click()
 turn_on = driver.find_element(By.CSS_SELECTOR, "#ember522")
 # turn_on.click()
 driver.execute_script("arguments[0].click();", turn_on)
+
+# todo need to read Q&A section
