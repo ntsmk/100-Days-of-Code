@@ -41,14 +41,20 @@ driver.switch_to.window(base_window)
 print(driver.title)
 
 # dismiss all requests
-time.sleep(5)
-allow = driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div/div/div[3]/button[1]/div[2]/div[2]")
+time.sleep(30)
+print("signed in to Tinder")
+
+allow = driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div/div/div[3]/button[1]")
 allow.click()
+print("clicked allow")
+
 time.sleep(5)
-miss_out = driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div/div/div[3]/button[2]/div[2]/div[2]")
+miss_out = driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div/div/div[3]/button[2]")
 miss_out.click()
 
 # swipe left
 time.sleep(5)
-nope = driver.find_element(By.CSS_SELECTOR, ".Bgc\(\$c-ds-background-gamepad-sparks-nope-default\)")
+# nope = driver.find_element(By.CSS_SELECTOR, ".Bgc\(\$c-ds-background-gamepad-sparks-nope-default\)")
+nope = driver.find_element(By.XPATH, "/html/body/div[1]/div/div[1]/div/main/div[1]/div/div/div/div[1]/div/div/div[4]/div/div[2]/button")
 nope.click()
+
