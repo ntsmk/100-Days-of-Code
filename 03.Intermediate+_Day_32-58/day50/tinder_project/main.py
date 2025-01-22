@@ -4,12 +4,16 @@ from selenium.webdriver.common.keys import Keys
 import os
 from dotenv import load_dotenv
 import time
+from selenium.webdriver.common.action_chains import ActionChains
 
 URL = "https://tinder.com/"
 
 load_dotenv()
 email = os.getenv("email")
 password = os.getenv("password")
+minutes = 5
+timeout = 60 * minutes  # [seconds]
+timeout_start = time.time()
 
 driver = webdriver.Firefox()
 driver.get(URL)
@@ -48,13 +52,14 @@ allow = driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div/div/div[3]/
 allow.click()
 print("clicked allow")
 
-time.sleep(5)
+time.sleep(15)
 miss_out = driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div/div/div[3]/button[2]")
 miss_out.click()
+print("clicked miss out")
 
-# swipe left
-time.sleep(5)
-# nope = driver.find_element(By.CSS_SELECTOR, ".Bgc\(\$c-ds-background-gamepad-sparks-nope-default\)")
-nope = driver.find_element(By.XPATH, "/html/body/div[1]/div/div[1]/div/main/div[1]/div/div/div/div[1]/div/div/div[4]/div/div[2]/button")
-nope.click()
+# swiping part. Arrow Left = Nope, Arrow Right = like
+time.sleep(5) # wait for loading
+while time.time() < timeout_start + timeout:
+    ActionChains(driver).key_down(Keys.ARROW_RIGHT).key_up(Keys.ARROW_RIGHT).perform()
+    time.sleep(2) # wait for the next swipe
 
