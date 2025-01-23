@@ -8,10 +8,22 @@ load_dotenv()
 email = os.getenv("email")
 password = os.getenv("password")
 
-promised_down=  100
-promised_up = 10
-
 URL = "https://www.speedtest.net/"
+# driver.get(URL)
 
-driver = webdriver.Firefox()
-driver.get(URL)
+class InternetSpeedTwitterBot:
+    def __init__(self):
+        self.promised_down = 100
+        self.promised_up = 10
+        self.driver = webdriver.Firefox()
+
+    def get_internet_speed(self):
+        pass
+
+    def tweet_at_provider(self):
+        pass
+
+
+twitter_bot = InternetSpeedTwitterBot()
+twitter_bot.get_internet_speed()
+twitter_bot.tweet_at_provider()
