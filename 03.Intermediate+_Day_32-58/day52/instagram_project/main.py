@@ -26,14 +26,22 @@ class InstaFollower:
         password_input.send_keys(password)
         password_input.send_keys(Keys.ENTER)
 
-        time.sleep(5)
+        time.sleep(7)
         not_now1 = self.driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div[2]/div/div/div[1]/div[1]/div[1]/section/main/div/div/div/div")
         not_now1.click()
-
-        # not_now2 = self.driver.find_element(By.XPATH, "")
+        time.sleep(3)
 
     def find_followers(self):
-        pass
+        self.driver.get(f"https://www.instagram.com/{similar_account}/")
+        time.sleep(5)
+
+        # follower_link = self.driver.find_element(By.CSS_SELECTOR, "a[href='/nintendoamerica/followers/']")
+        follower_link = self.driver.find_element(By.XPATH, "//a[contains(@href, '/followers/')]")
+        follower_link.click()
+        time.sleep(5)
+
+        # todo scrolling down followers popup
+
 
     def follow(self):
         pass
