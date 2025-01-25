@@ -6,18 +6,26 @@ from dotenv import load_dotenv
 import time
 
 load_dotenv()
-username = os.getenv("username")
+uid = os.getenv("uid")
 password = os.getenv("password")
 similar_account = "nintendoamerica"
-
-instagram_url = "https://www.instagram.com/"
 
 class InstaFollower:
     def __init__(self):
         self.driver = webdriver.Firefox()
 
     def login(self):
-        pass
+        self.driver.get("https://www.instagram.com/accounts/login/")
+        time.sleep(5)
+        # aria-label="Phone number, username, or email"
+        username_input = self.driver.find_element(By.XPATH, "//input[@aria-label='Phone number, username, or email']")
+        username_input.send_keys(uid)
+        # aria-label="Password"
+
+        # todo need to figure out how to fix
+        password_input = self.driver.find_element((By.XPATH, "//input[@aria-label='Password']"))
+        password_input.send_keys(password)
+        password_input.send_keys(Keys.ENTER)
 
     def find_followers(self):
         pass
