@@ -20,12 +20,17 @@ class InstaFollower:
         # aria-label="Phone number, username, or email"
         username_input = self.driver.find_element(By.XPATH, "//input[@aria-label='Phone number, username, or email']")
         username_input.send_keys(uid)
-        # aria-label="Password"
 
-        # todo need to figure out how to fix
-        password_input = self.driver.find_element((By.XPATH, "//input[@aria-label='Password']"))
+        # aria-label="Password"
+        password_input = self.driver.find_element(By.XPATH, "//input[@aria-label='Password']")
         password_input.send_keys(password)
         password_input.send_keys(Keys.ENTER)
+
+        time.sleep(5)
+        not_now1 = self.driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div[2]/div/div/div[1]/div[1]/div[1]/section/main/div/div/div/div")
+        not_now1.click()
+
+        # not_now2 = self.driver.find_element(By.XPATH, "")
 
     def find_followers(self):
         pass
