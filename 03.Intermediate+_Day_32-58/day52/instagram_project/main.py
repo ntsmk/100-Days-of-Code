@@ -4,6 +4,7 @@ from selenium.webdriver.common.keys import Keys
 import os
 from dotenv import load_dotenv
 import time
+from selenium.webdriver.common.action_chains import ActionChains
 
 load_dotenv()
 uid = os.getenv("uid")
@@ -34,8 +35,6 @@ class InstaFollower:
     def find_followers(self):
         self.driver.get(f"https://www.instagram.com/{similar_account}/")
         time.sleep(5)
-
-        # follower_link = self.driver.find_element(By.CSS_SELECTOR, "a[href='/nintendoamerica/followers/']")
         follower_link = self.driver.find_element(By.XPATH, "//a[contains(@href, '/followers/')]")
         follower_link.click()
         time.sleep(5)
@@ -43,16 +42,29 @@ class InstaFollower:
         # Scroll the followers popup
         popup = self.driver.find_element(By.XPATH, "//div[@class='xyi19xy x1ccrb07 xtf3nb5 x1pc53ja x1lliihq x1iyjqo2 xs83m0k xz65tgg x1rife3k x1n2onr6']")
         print("successfully load popup")
-        for _ in range(10):  # Adjust the range to scroll more or less
-            # self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", popup)
-            popup.send_keys(Keys.ARROW_DOWN)
-            time.sleep(1)  # Pause to allow content to load
+        # for _ in range(10):  # Adjust the range to scroll more or less
+        #     # self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", popup)
+        #     popup.send_keys(Keys.ARROW_DOWN)
+        #     time.sleep(1)  # Pause to allow content to load
+
 
 
     def follow(self):
-        pass
+        follow_buttons = self.driver.find_elements(By.XPATH, "//div[@class='_ap3a _aaco _aacw _aad6 _aade']")
+        print("loaded follow buttons")
 
-insta_bot = InstaFollower()
-insta_bot.login()
-insta_bot.find_followers()
-insta_bot.follow()
+        # todo need to figure out here
+        for button in follow_buttons:
+            try:
+                time.sleep(2)
+                button.click()
+                time.sleep(2)
+                # self.driver.execute_script("arguments[0].click();", button) # it works but IG gives warnings
+            except selenium.common.exceptions.ElementClickInterceptedException:
+                pass
+
+if __name__ == '__main__':
+    insta_bot = InstaFollower()
+    insta_bot.login()
+    insta_bot.find_followers()
+    insta_bot.follow()
