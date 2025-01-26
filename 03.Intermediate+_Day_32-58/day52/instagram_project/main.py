@@ -41,11 +41,12 @@ class InstaFollower:
         time.sleep(5)
 
         # Scroll the followers popup
-        popup = self.driver.find_element(By.XPATH, "//div[@role='dialog']") # no error but something wrong
+        popup = self.driver.find_element(By.XPATH, "//div[@class='xyi19xy x1ccrb07 xtf3nb5 x1pc53ja x1lliihq x1iyjqo2 xs83m0k xz65tgg x1rife3k x1n2onr6']")
         print("successfully load popup")
         for _ in range(10):  # Adjust the range to scroll more or less
-            self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", popup) # not working, no error
-            time.sleep(2)  # Pause to allow content to load
+            # self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", popup)
+            popup.send_keys(Keys.ARROW_DOWN)
+            time.sleep(1)  # Pause to allow content to load
 
 
     def follow(self):
