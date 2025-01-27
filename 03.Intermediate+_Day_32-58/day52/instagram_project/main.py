@@ -50,18 +50,20 @@ class InstaFollower:
 
 
     def follow(self):
-        follow_buttons = self.driver.find_elements(By.XPATH, "//div[@class='_ap3a _aaco _aacw _aad6 _aade']")
-        print("loaded follow buttons")
+        # follow_buttons = self.driver.find_elements(By.XPATH, "//div[@class='_ap3a _aaco _aacw _aad6 _aade']")
+        follow_buttons = self.driver.find_elements(By.CSS_SELECTOR, value="button._acan")
+        # follow_buttons = self.driver.find_elements(By.CSS_SELECTOR, "button._acan._acap._acas._aj1-._ap30")
+
+        print("found follow buttons")
+        print(follow_buttons[0].text) # it prints out "follow"
+        print(follow_buttons)
 
         # todo need to figure out here
         for button in follow_buttons:
-            try:
-                time.sleep(2)
-                button.click()
-                time.sleep(2)
-                # self.driver.execute_script("arguments[0].click();", button) # it works but IG gives warnings
-            except selenium.common.exceptions.ElementClickInterceptedException:
-                pass
+            self.driver.execute_script("arguments[0].click();", button) # it works but IG gives warnings
+            # ActionChains(self.driver).move_to_element(button).perform() # still it gives ElementClickInterceptedException
+            # button.click()
+            time.sleep(2)
 
 if __name__ == '__main__':
     insta_bot = InstaFollower()
