@@ -43,7 +43,7 @@ class DataEntry:
         address_elements = soup.find_all("address", attrs={"data-test": "property-card-addr"})
         self.addresses = [address.text.strip().replace("|", "") for address in address_elements]
 
-        # print(len(self.links[1::2])) # len 89 -> why?? links[1::2] -> now it matches 44
+        # print(self.links) # len 89 -> why?? links[1::2] -> now it matches 44
         # print(len(self.prices)) # len 44
         # print(len(self.addresses)) # len 44
 
@@ -51,7 +51,7 @@ class DataEntry:
         self.driver = webdriver.Firefox()
         self.driver.get(FORM_URL)
 
-        # todo need to figure out XPATH
+        # todo need to figure out XPATH, and then use for loop range(len(self.links))
         q1 = self.driver.find_element(By.XPATH, "")
         q1.send_keys(self.addresses[0])
 
@@ -61,7 +61,7 @@ class DataEntry:
         q3 = self.driver.find_element(By.XPATH, "")
         q3.send_keys(self.links[0])
 
-        # done following
+        # done these
         submit_button = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/form/div[2]/div/div[3]/div[1]/div[1]/div/span/span")
         submit_button.click()
         time.sleep(3)
@@ -69,12 +69,12 @@ class DataEntry:
         another_one.click()
         time.sleep(3)
 
-
 if __name__ == '__main__':
     data_entry = DataEntry()
     # data_entry.scrape_data()
     data_entry.send_data()
 
+    # tried to create get spreadsheet method but google wont let me sign in using the browser
 
 
 
