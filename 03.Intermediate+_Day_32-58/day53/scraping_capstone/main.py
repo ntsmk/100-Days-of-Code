@@ -19,6 +19,11 @@ FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfsjD62Gwntd50JDjRr-9_utIIG
 EMAIL = os.getenv("email")
 PASSWORD = os.getenv("password")
 
+header = {
+    "Accept-Language": "en-US,en;q=0.9",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+}
+
 class DataEntry:
     def __init__(self):
         self.links = []
@@ -26,7 +31,7 @@ class DataEntry:
         self.addresses = []
 
     def scrape_data(self):
-        response = requests.get(ZILLOW_URL)
+        response = requests.get(ZILLOW_URL, headers=header)
         zillow_page = response.text
         soup = BeautifulSoup(zillow_page, "html.parser")
 
@@ -44,8 +49,8 @@ class DataEntry:
         self.addresses = [address.text.strip().replace("|", "") for address in address_elements]
 
         # print(self.links) # len 89 -> why?? links[1::2] -> now it matches 44
-        # print(len(self.prices)) # len 44
-        # print(len(self.addresses)) # len 44
+        # print(self.prices) # len 44
+        # print(self.addresses) # len 44
 
     def send_data(self):
 
