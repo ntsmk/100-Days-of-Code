@@ -52,14 +52,14 @@ class DataEntry:
         self.driver.get(FORM_URL)
 
         # todo need to figure out XPATH, and then use for loop range(len(self.links))
-        q1 = self.driver.find_element(By.XPATH, "")
-        q1.send_keys(self.addresses[0])
+        q1 = self.driver.find_element(By.XPATH, "//input[contains(@aria-describedby, 'i2')]")
+        q1.send_keys("test")
 
-        q2 = self.driver.find_element(By.XPATH, "")
-        q2.send_keys(self.prices[0])
+        q2 = self.driver.find_element(By.XPATH, "//input[contains(@aria-describedby, 'i7')]")
+        q2.send_keys("test2")
 
-        q3 = self.driver.find_element(By.XPATH, "")
-        q3.send_keys(self.links[0])
+        q3 = self.driver.find_element(By.XPATH, "//input[contains(@aria-describedby, 'i12')]")
+        q3.send_keys("test3")
 
         # done these
         submit_button = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/form/div[2]/div/div[3]/div[1]/div[1]/div/span/span")
