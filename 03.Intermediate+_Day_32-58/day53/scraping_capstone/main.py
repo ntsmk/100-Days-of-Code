@@ -48,34 +48,33 @@ class DataEntry:
         # print(len(self.addresses)) # len 44
 
     def send_data(self):
+
         self.driver = webdriver.Firefox()
         self.driver.get(FORM_URL)
+        time.sleep(5)
 
-        # todo need to figure out XPATH, and then use for loop range(len(self.links))
-        q1 = self.driver.find_element(By.XPATH, "//input[contains(@aria-describedby, 'i2')]")
-        q1.send_keys("test")
+        # todo need to figure out send_keys, and then use for loop range(len(self.links))
+        for i in range(len(self.links)):
+            q1 = self.driver.find_element(By.XPATH, "//input[contains(@aria-describedby, 'i2')]")
+            q1.send_keys(self.addresses[i])
 
-        q2 = self.driver.find_element(By.XPATH, "//input[contains(@aria-describedby, 'i7')]")
-        q2.send_keys("test2")
+            q2 = self.driver.find_element(By.XPATH, "//input[contains(@aria-describedby, 'i7')]")
+            q2.send_keys(self.prices[i])
 
-        q3 = self.driver.find_element(By.XPATH, "//input[contains(@aria-describedby, 'i12')]")
-        q3.send_keys("test3")
+            q3 = self.driver.find_element(By.XPATH, "//input[contains(@aria-describedby, 'i12')]")
+            q3.send_keys(self.links[i])
 
-        # done these
-        submit_button = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/form/div[2]/div/div[3]/div[1]/div[1]/div/span/span")
-        submit_button.click()
-        time.sleep(3)
-        another_one = self.driver.find_element(By.XPATH, "/html/body/div[1]/div[2]/div[1]/div/div[4]/a")
-        another_one.click()
-        time.sleep(3)
+            submit_button = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/form/div[2]/div/div[3]/div[1]/div[1]/div/span/span")
+            submit_button.click()
+            time.sleep(3)
+            another_one = self.driver.find_element(By.XPATH, "/html/body/div[1]/div[2]/div[1]/div/div[4]/a")
+            another_one.click()
+            time.sleep(3)
 
 if __name__ == '__main__':
     data_entry = DataEntry()
-    # data_entry.scrape_data()
+    data_entry.scrape_data()
     data_entry.send_data()
-
-    # tried to create get spreadsheet method but google wont let me sign in using the browser
-
 
 
 
