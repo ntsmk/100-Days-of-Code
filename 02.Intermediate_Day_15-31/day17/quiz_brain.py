@@ -19,7 +19,7 @@ class QuizBrain:
         choice = input(f"Q.{self.question_number}: {current_question.text} (True/False)?: ")
         self.check_answer(choice, current_question.answer)
 
-    # called by next_question method so you don't need to call this method in main.py
+    # called by next_question method so you don't need to call this method in
     def check_answer(self, choice, correct_answer):
         if choice.lower() == correct_answer.lower():
             print("you are right!")
