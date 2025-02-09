@@ -10,5 +10,13 @@ def hello_world():
 def about():
     return "<p>This is the about page.</p>"
 
+@app.route("/bye")
+def bye():
+    return "<p>Goodbye!</p>"
+
+@app.route("/username/<name>")
+def greet(name):
+    return f"<p>Hello, {name}!</p>"
+
 if __name__ == "__main__":
     app.run()
