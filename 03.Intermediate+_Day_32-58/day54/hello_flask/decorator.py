@@ -22,6 +22,9 @@ def say_bye():
 #Without the @ syntactic sugar
 def say_greeting():
     print("How are you?")
-decorated_function = delay_decorator(say_greeting)
-decorated_function()
+# decorated_function = delay_decorator(say_greeting)
+# decorated_function()
 
+say_hello()
+say_bye()
+say_greeting() # This will not be delayed as it's not decorated with the delay_decorator function.'
