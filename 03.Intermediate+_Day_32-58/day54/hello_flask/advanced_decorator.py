@@ -4,7 +4,7 @@ def logging_decorator(function):
         print(f"You called {function.__name__}{args}")
         result = function(*args)
         print(f"It returned: {result}")
-        return result
+        return result # needs to return because result is local variable. not global variable
     return wrapped_function
 
 
