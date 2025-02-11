@@ -1,13 +1,14 @@
-# TODO: Create the logging_decorator() function
+# TODO: Create the logging_decorator() function ?
 def logging_decorator(function):
-    def wrapper(*args):
+    def wrapped_function(*args):
         print(f"You called {function.__name__}{args}")
         result = function(*args)
         print(f"It returned: {result}")
-    return wrapper
+        return result
+    return wrapped_function
 
-# TODO: Use the decorator
 
+# TODO: Use the decorator ?
 @logging_decorator
 def a_function(*args):
     return sum(args)
