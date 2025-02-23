@@ -12,11 +12,10 @@ gender_endpoint = "https://api.genderize.io?name="
 app = Flask(__name__)
 @app.route('/')
 def display():
-    return '<h1>Enter your name</h1>'
+    return '<h1>Enter your name. /guess/(your name)</h1>'
 
-@app.route('/guess/<str:entered_name>')
+@app.route('/guess/<string:entered_name>')
 def result(entered_name):
-    # todo need to fill out here. use agefy and genderfy API. take input from URL path
     name = entered_name.title()
     gender = requests.get(url=gender_endpoint+name).json()['gender']
     age = requests.get(url=age_endpoint+name).json()['age']
