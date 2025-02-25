@@ -11,5 +11,10 @@ def home():
     all_post = response.json()
     return render_template("index.html", posts=all_post)
 
+
+@app.route('/post/<num>')
+def get_post(num):
+    return render_template('post.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
